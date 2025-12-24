@@ -4,7 +4,7 @@
 // URLに '/en/' が含まれているかチェック
 const isEn = location.pathname.includes('/en/');
 
-// 相対パスのプレフィックス（英語版なら '../' をつけて親階層に戻る）
+// 相対パスのプレフィックス
 const path = isEn ? '../' : './';
 
 // 言語別のテキスト設定
@@ -15,16 +15,16 @@ const langData = {
         news: 'お知らせ',
         about: '私たちについて',
         contact: 'お問い合わせ',
-        address: '〒965-0000<br>福島県会津若松市八角町3番17号',
+        // address: 削除しました
         topLink: 'index.html',
         visionLink: 'vision.html',
         newsLink: 'news.html',
         aboutLink: 'about.html',
         contactLink: 'contact.html',
-        switchJaClass: 'is-active', // JAボタンの光る状態
+        switchJaClass: 'is-active',
         switchEnClass: '',
-        switchJaLink: isEn ? '../index.html' : '#', // 今がENならJAは親階層へ
-        switchEnLink: isEn ? '#' : 'en/index.html'  // 今がJAならENはen階層へ
+        switchJaLink: isEn ? '../index.html' : '#',
+        switchEnLink: isEn ? '#' : 'en/index.html'
     },
     en: {
         top: 'HOME',
@@ -32,15 +32,15 @@ const langData = {
         news: 'NEWS',
         about: 'WHO WE ARE',
         contact: 'GET IN TOUCH',
-        address: '3-17 Hakkakumachi, Aizuwakamatsu City,<br>Fukushima, 965-0000, Japan',
+        // address: Removed
         topLink: 'index.html',
         visionLink: 'vision.html',
         newsLink: 'news.html',
         aboutLink: 'about.html',
         contactLink: 'contact.html',
         switchJaClass: '',
-        switchEnClass: 'is-active', // ENボタンの光る状態
-        switchJaLink: '../index.html', // 簡易的にトップへ戻す設定（ページごとの対応は後述）
+        switchEnClass: 'is-active',
+        switchJaLink: '../index.html',
         switchEnLink: '#'
     }
 };
@@ -48,13 +48,11 @@ const langData = {
 // 現在の言語データを選択
 const txt = isEn ? langData.en : langData.ja;
 
-// ページごとの言語切り替えリンクの微調整（今いるページのファイル名を取得）
+// ページごとの言語切り替えリンクの微調整
 const currentFile = location.pathname.split('/').pop() || 'index.html';
 if (isEn) {
-    // 英語ページにいる場合、日本語ボタンは親階層の同名ファイルへ
     txt.switchJaLink = '../' + currentFile;
 } else {
-    // 日本語ページにいる場合、英語ボタンはen階層の同名ファイルへ
     txt.switchEnLink = 'en/' + currentFile;
 }
 
@@ -120,11 +118,11 @@ const headerContent = `
 `;
 
 // フッター
+// ★修正点：住所の変数を削除し、メールアドレスのみにしました
 const footerContent = `
     <div class="footer__inner">
         <div class="footer__left">
             <address class="footer__address">
-                ${txt.address}<br>
                 <a href="mailto:nsk.aizu@gmail.com" class="footer__mail">nsk.aizu [at] gmail.com</a>
             </address>
         </div>
@@ -180,18 +178,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. お問い合わせフォーム（変更なし）
+    // 3. お問い合わせフォーム
     const form = document.getElementById("contact-form");
     const statusEl = document.getElementById("form-status");
 
     if (form) {
         const FORM_ENDPOINT = form.action;
-        const REDIRECT_TO = isEn ? "index.html" : "../index.html"; // リダイレクト先も言語に合わせる
+        const REDIRECT_TO = isEn ? "index.html" : "../index.html"; 
         const REDIRECT_DELAY_MS = 2000;
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            statusEl.textContent = isEn ? "Sending..." : "送信中…"; // メッセージも英語化
+            statusEl.textContent = isEn ? "Sending..." : "送信中…"; 
             const submitBtn = form.querySelector('button[type="submit"]');
             if (submitBtn) submitBtn.disabled = true;
 
@@ -217,25 +215,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-});
-/* -------------------------------------------------------
-   既存の common.js のコード（上部）はそのまま残してください
-   一番下に以下を追記します
-------------------------------------------------------- */
 
-// ==========================================
-// ファビコンの自動挿入
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    // 既存の path 変数（'./' か '../'）を使ってパスを解決
-    // もし既存コード内で path が定義されていないスコープの場合は、
-    // ここで再定義が必要です（以下の2行があれば安全です）
-    const isEnPage = location.pathname.includes('/en/');
-    const relativePath = isEnPage ? '../' : './';
-
+    // 4. ファビコンの自動挿入
     const head = document.head;
+    // ファビコン用の相対パス（isEn判定済み）
+    const relativePath = path; 
 
-    // 挿入するHTMLタグ（生成されたファイル名に合わせています）
     const faviconTags = `
         <link rel="apple-touch-icon" sizes="180x180" href="${relativePath}apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="${relativePath}favicon-32x32.png">
@@ -244,7 +229,5 @@ document.addEventListener("DOMContentLoaded", () => {
         <link rel="shortcut icon" href="${relativePath}favicon.ico">
         <meta name="theme-color" content="#000000">
     `;
-
-    // headの末尾に追加
     head.insertAdjacentHTML('beforeend', faviconTags);
 });
