@@ -1044,6 +1044,7 @@ body {
 .global-nav.is-active .global-nav__item:nth-child(3) { transition-delay: 0.2s; }
 .global-nav.is-active .global-nav__item:nth-child(4) { transition-delay: 0.25s; }
 .global-nav.is-active .global-nav__item:nth-child(5) { transition-delay: 0.3s; }
+.global-nav.is-active .global-nav__item:nth-child(6) { transition-delay: 0.35s; }
 
 /* リンクのデザイン */
 .global-nav__item a {

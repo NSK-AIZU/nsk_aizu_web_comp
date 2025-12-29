@@ -13,12 +13,14 @@ const langData = {
         top: 'トップページ',
         vision: 'ビジョン',
         news: 'お知らせ',
+        rice: '画面de田んぼ',
         about: '私たちについて',
         contact: 'お問い合わせ',
         // address: 削除しました
         topLink: 'index.html',
         visionLink: 'vision.html',
         newsLink: 'news.html',
+        riceLink: 'rice_calc.html',
         aboutLink: 'about.html',
         contactLink: 'contact.html',
         switchJaClass: 'is-active',
@@ -30,12 +32,14 @@ const langData = {
         top: 'HOME',
         vision: 'OUR VISION',
         news: 'NEWS',
+        rice: 'RICE CALCULATOR',
         about: 'WHO WE ARE',
         contact: 'GET IN TOUCH',
         // address: Removed
         topLink: 'index.html',
         visionLink: 'vision.html',
         newsLink: 'news.html',
+        riceLink: 'rice_calc.html',
         aboutLink: 'about.html',
         contactLink: 'contact.html',
         switchJaClass: '',
@@ -99,6 +103,12 @@ const headerContent = `
                 <a href="${txt.newsLink}">
                     <span class="global-nav__en">- NEWS -</span>
                     <span class="global-nav__jp">${txt.news}</span>
+                </a>
+            </li>
+            <li class="global-nav__item">
+                <a href="${txt.riceLink}">
+                    <span class="global-nav__en">- RICE CALCULATOR -</span>
+                    <span class="global-nav__jp">${txt.rice}</span>
                 </a>
             </li>
             <li class="global-nav__item">
