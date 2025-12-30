@@ -1,0 +1,11 @@
+# robots.txt for NSK_AIZU
+
+User-agent: *
+Allow: /
+
+# Disallow admin or temporary directories if any
+# Disallow: /admin/
+# Disallow: /tmp/
+
+# Sitemap location
+Sitemap: https://terush.github.io/nsk_aizu_web_comp/sitemap.xml
