@@ -226,7 +226,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            statusEl.textContent = isEn ? "Sending..." : "送信中…"; 
+            statusEl.textContent = isEn ? "Sending..." : "送信中…";
+            statusEl.className = "form-status";
+            statusEl.removeAttribute('role');
             const submitBtn = form.querySelector('button[type="submit"]');
             if (submitBtn) submitBtn.disabled = true;
 
@@ -240,13 +242,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (res.ok) {
                     statusEl.textContent = isEn ? "Sent successfully. Redirecting..." : "送信しました。トップページに戻ります。";
+                    statusEl.className = "form-status form-status--success";
                     form.reset();
                     setTimeout(() => { window.location.href = REDIRECT_TO; }, REDIRECT_DELAY_MS);
                 } else {
-                    statusEl.textContent = isEn ? "Failed to send." : "送信に失敗しました。";
+                    const errorData = await res.json().catch(() => ({}));
+                    const errorMsg = errorData.error || (isEn ? "Failed to send. Please try again." : "送信に失敗しました。もう一度お試しください。");
+                    statusEl.textContent = errorMsg;
+                    statusEl.className = "form-status form-status--error";
+                    statusEl.setAttribute('role', 'alert');
                 }
             } catch (err) {
-                statusEl.textContent = isEn ? "Connection error." : "通信エラーで送信できませんでした。";
+                statusEl.textContent = isEn ? "Connection error. Please check your internet connection and try again." : "通信エラーで送信できませんでした。インターネット接続を確認してもう一度お試しください。";
+                statusEl.className = "form-status form-status--error";
+                statusEl.setAttribute('role', 'alert');
             } finally {
                 if (submitBtn) submitBtn.disabled = false;
             }

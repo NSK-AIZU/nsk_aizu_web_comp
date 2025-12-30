@@ -50,6 +50,29 @@ body {
 }
 
 /* -------------------------
+   Accessibility - Link Clarity
+------------------------- */
+/* 本文中のリンクは下線を表示して明確に */
+main a:not(.card):not(.btn-arrow):not(.btn-submit):not(.btn-back-top):not(.card__heading) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+main a:not(.card):not(.btn-arrow):not(.btn-submit):not(.btn-back-top):not(.card__heading):hover {
+    text-decoration-thickness: 2px;
+}
+
+/* フッターのメールリンクも下線表示 */
+.footer__mail {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.footer__mail:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* -------------------------
    Accessibility - Focus Indicators
 ------------------------- */
 /* グローバルフォーカススタイル */
@@ -771,7 +794,7 @@ button:focus-visible {
 .about-section__num {
     font-family: 'Cinzel', serif;
     font-size: 32px;
-    color: #444; /* 番号は少し暗くして背景に馴染ませる */
+    color: #777; /* 番号は少し暗くして背景に馴染ませる - コントラスト改善 */
 }
 
 .about-section__title {
@@ -1042,7 +1065,7 @@ button:focus-visible {
 
 /* プレースホルダーの色変更（薄くする） */
 ::placeholder {
-    color: #555;
+    color: #888; /* コントラスト改善: #555から変更 */
     opacity: 1;
 }
 
@@ -1081,7 +1104,25 @@ button:focus-visible {
         display: none; /* スマホで改行を消す場合など */
     }
 }
-.form-status { margin-top: 12px; font-size: 14px; }
+.form-status {
+    margin-top: 12px;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.form-status--success {
+    background-color: rgba(100, 255, 150, 0.1);
+    border: 1px solid rgba(100, 255, 150, 0.3);
+    color: #66ff99;
+}
+
+.form-status--error {
+    background-color: rgba(255, 100, 100, 0.1);
+    border: 1px solid rgba(255, 100, 100, 0.3);
+    color: #ff6666;
+}
 
 
 /* -------------------------
