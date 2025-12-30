@@ -67,12 +67,13 @@ if (isEn) {
 
 // ヘッダー + 全画面メニュー
 const headerContent = `
+    <a href="#main-content" class="skip-link">${isEn ? 'Skip to main content' : 'メインコンテンツへスキップ'}</a>
     <div class="header__inner">
-        <h1 class="header__logo">
+        <div class="header__logo">
             <a href="${txt.topLink}" aria-label="${isEn ? 'Go to home page' : 'ホームページへ戻る'}">
                 <img src="${path}logo.png" alt="NSK_AIZU">
             </a>
-        </h1>
+        </div>
         <div class="header__nav-area">
             <div class="header__lang">
                 <a href="${txt.switchJaLink}"
@@ -141,9 +142,8 @@ const headerContent = `
 `;
 
 // フッター
-// ★修正点：住所の変数を削除し、メールアドレスのみにしました
 const footerContent = `
-    <div class="footer__inner">
+    <div class="footer__inner" role="contentinfo">
         <div class="footer__left">
             <address class="footer__address">
                 <a href="mailto:nsk.aizu@gmail.com" class="footer__mail">nsk.aizu [at] gmail.com</a>
