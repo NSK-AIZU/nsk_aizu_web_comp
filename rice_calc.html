@@ -355,15 +355,20 @@
             const widthPx = window.innerWidth;
             const heightPx = window.innerHeight;
 
-            // 2. 物理サイズへの変換 (概算: 96dpi)
+            // 2. モバイル判定と補正係数の設定
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isMobile = /iphone|ipad|ipod|android|mobile/.test(userAgent);
+            const scaleFactor = isMobile ? 0.64 : 0.75;
+
+            // 3. 物理サイズへの変換（実測データに基づく補正係数を適用）
             const dpi = 96;
-            const widthCm = (widthPx / dpi) * 2.54;
-            const heightCm = (heightPx / dpi) * 2.54;
+            const widthCm = (widthPx / dpi) * 2.54 * scaleFactor;
+            const heightCm = (heightPx / dpi) * 2.54 * scaleFactor;
 
             // 面積 (平方メートル)
             const areaM2 = (widthCm * heightCm) / 10000;
 
-            // 3. お米の収穫量計算
+            // 4. お米の収穫量計算
             // 10a (1000m²) あたり玄米540kg = 1m²あたり540g
             // 玄米 -> 白米(0.9) -> ご飯(2.3)
             const cookedRicePerM2 = 540 * 0.9 * 2.3; // g/m²
@@ -374,13 +379,13 @@
             // 米粒の数 (ご飯1gあたり約22粒と仮定)
             const grainsCount = Math.floor(totalCookedRice * 22);
 
-            // 4. お茶碗判定の計算
+            // 5. お茶碗判定の計算
             const achievementRate = (totalCookedRice / BOWL_SERVING) * 100;
             const bowlCount = totalCookedRice / BOWL_SERVING;
 
-            // 5. 結果の表示更新
+            // 6. 結果の表示更新
             document.getElementById('screen-size').innerText =
-                `${widthCm.toFixed(1)} cm × ${heightCm.toFixed(1)} cm`;
+                `${widthCm.toFixed(1)} cm × ${heightCm.toFixed(1)} cm（※実寸補正済み）`;
 
             document.getElementById('rice-amount').innerText =
                 totalCookedRice.toFixed(2);
@@ -388,7 +393,7 @@
             document.getElementById('detail-info').innerText =
                 `米粒換算: 約 ${grainsCount.toLocaleString()} 粒`;
 
-            // 6. お茶碗判定の表示（分岐処理）
+            // 7. お茶碗判定の表示（分岐処理）
             const bowlStatusEl = document.getElementById('bowl-status');
             const bowlMessageEl = document.getElementById('bowl-message');
             const bowlDetailEl = document.getElementById('bowl-detail');
@@ -400,17 +405,17 @@
 
                 bowlStatusEl.className = 'bowl-status shortage';
                 bowlMessageEl.innerHTML = 'お茶碗一杯には足りません！';
-                bowlDetailEl.innerHTML = `あなたの画面があと<span class="emphasis">${additionalDevices}</span>台並ぶと、<br>ようやく一杯分になります。`;
+                bowlDetailEl.innerHTML = `一杯分にするには、この端末があと<span class="emphasis">${additionalDevices}</span>台必要です`;
             } else {
                 // ケース2: 150g以上（充足）
                 const bowlsServed = Math.floor(bowlCount);
 
                 bowlStatusEl.className = 'bowl-status sufficient';
-                bowlMessageEl.innerHTML = '素晴らしい！自給自足可能です！';
-                bowlDetailEl.innerHTML = `この画面サイズなら、1シーズンで<br><span class="emphasis">${bowlsServed}</span>杯分のご飯が作れます。`;
+                bowlMessageEl.innerHTML = 'すごい！この画面サイズなら自給自足可能です';
+                bowlDetailEl.innerHTML = `お茶碗 約<span class="emphasis">${bowlsServed}</span>杯分になります`;
             }
 
-            // 7. ビジュアライゼーション（米粒表示）
+            // 8. ビジュアライゼーション（米粒表示）
             const container = document.getElementById('visual-container');
             container.innerHTML = '';
 

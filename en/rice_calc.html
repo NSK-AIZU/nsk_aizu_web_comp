@@ -355,15 +355,20 @@
             const widthPx = window.innerWidth;
             const heightPx = window.innerHeight;
 
-            // 2. Convert to physical size (estimated: 96dpi)
+            // 2. Mobile detection and scale factor setting
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isMobile = /iphone|ipad|ipod|android|mobile/.test(userAgent);
+            const scaleFactor = isMobile ? 0.64 : 0.75;
+
+            // 3. Convert to physical size (with correction factor based on actual measurements)
             const dpi = 96;
-            const widthCm = (widthPx / dpi) * 2.54;
-            const heightCm = (heightPx / dpi) * 2.54;
+            const widthCm = (widthPx / dpi) * 2.54 * scaleFactor;
+            const heightCm = (heightPx / dpi) * 2.54 * scaleFactor;
 
             // Area (square meters)
             const areaM2 = (widthCm * heightCm) / 10000;
 
-            // 3. Calculate rice harvest
+            // 4. Calculate rice harvest
             // 10a (1000m²) yields 540kg of brown rice = 540g per 1m²
             // Brown rice -> White rice (0.9) -> Cooked rice (2.3)
             const cookedRicePerM2 = 540 * 0.9 * 2.3; // g/m²
@@ -374,13 +379,13 @@
             // Number of rice grains (assuming approx. 22 grains per 1g of cooked rice)
             const grainsCount = Math.floor(totalCookedRice * 22);
 
-            // 4. Bowl status calculation
+            // 5. Bowl status calculation
             const achievementRate = (totalCookedRice / BOWL_SERVING) * 100;
             const bowlCount = totalCookedRice / BOWL_SERVING;
 
-            // 5. Update results display
+            // 6. Update results display
             document.getElementById('screen-size').innerText =
-                `${widthCm.toFixed(1)} cm × ${heightCm.toFixed(1)} cm`;
+                `${widthCm.toFixed(1)} cm × ${heightCm.toFixed(1)} cm (*Calibrated)`;
 
             document.getElementById('rice-amount').innerText =
                 totalCookedRice.toFixed(2);
@@ -388,7 +393,7 @@
             document.getElementById('detail-info').innerText =
                 `Rice grains: approx. ${grainsCount.toLocaleString()} grains`;
 
-            // 6. Bowl status display (branching logic)
+            // 7. Bowl status display (branching logic)
             const bowlStatusEl = document.getElementById('bowl-status');
             const bowlMessageEl = document.getElementById('bowl-message');
             const bowlDetailEl = document.getElementById('bowl-detail');
@@ -400,17 +405,17 @@
 
                 bowlStatusEl.className = 'bowl-status shortage';
                 bowlMessageEl.innerHTML = 'Not enough for one bowl!';
-                bowlDetailEl.innerHTML = `You would need <span class="emphasis">${additionalDevices}</span> more<br>screen${additionalDevices > 1 ? 's' : ''} like yours to make one bowl.`;
+                bowlDetailEl.innerHTML = `You need <span class="emphasis">${additionalDevices}</span> more device${additionalDevices > 1 ? 's' : ''} to make one bowl`;
             } else {
                 // Case 2: 150g or more (sufficient)
                 const bowlsServed = Math.floor(bowlCount);
 
                 bowlStatusEl.className = 'bowl-status sufficient';
-                bowlMessageEl.innerHTML = 'Wonderful! You\'re self-sufficient!';
-                bowlDetailEl.innerHTML = `With this screen size, you could make<br><span class="emphasis">${bowlsServed}</span> bowl${bowlsServed > 1 ? 's' : ''} of rice in one season.`;
+                bowlMessageEl.innerHTML = 'Great! You\'re self-sufficient!';
+                bowlDetailEl.innerHTML = `This makes approx. <span class="emphasis">${bowlsServed}</span> bowl${bowlsServed > 1 ? 's' : ''}`;
             }
 
-            // 7. Visualization (rice grains display)
+            // 8. Visualization (rice grains display)
             const container = document.getElementById('visual-container');
             container.innerHTML = '';
 
