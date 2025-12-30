@@ -69,23 +69,36 @@ if (isEn) {
 const headerContent = `
     <div class="header__inner">
         <h1 class="header__logo">
-            <a href="${txt.topLink}">
+            <a href="${txt.topLink}" aria-label="${isEn ? 'Go to home page' : 'ホームページへ戻る'}">
                 <img src="${path}logo.png" alt="NSK_AIZU">
             </a>
         </h1>
         <div class="header__nav-area">
             <div class="header__lang">
-                <a href="${txt.switchJaLink}" class="header__lang-link ${txt.switchJaClass}">JA</a>
-                <span class="header__lang-divider"></span>
-                <a href="${txt.switchEnLink}" class="header__lang-link ${txt.switchEnClass}">EN</a>
+                <a href="${txt.switchJaLink}"
+                   class="header__lang-link ${txt.switchJaClass}"
+                   aria-label="${isEn ? 'Switch to Japanese' : '日本語版に切り替え'}">JA</a>
+                <span class="header__lang-divider" aria-hidden="true"></span>
+                <a href="${txt.switchEnLink}"
+                   class="header__lang-link ${txt.switchEnClass}"
+                   aria-label="${isEn ? 'Switch to English' : '英語版に切り替え'}">EN</a>
             </div>
-            <button class="header__menu-btn" id="js-menu-btn" aria-label="Menu">
-                <span></span><span></span><span></span>
+            <button class="header__menu-btn"
+                    id="js-menu-btn"
+                    aria-label="${isEn ? 'Open navigation menu' : 'ナビゲーションメニューを開く'}"
+                    aria-expanded="false"
+                    aria-controls="js-global-nav">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </button>
         </div>
     </div>
 
-    <nav class="global-nav" id="js-global-nav">
+    <nav class="global-nav"
+         id="js-global-nav"
+         role="navigation"
+         aria-label="${isEn ? 'Main navigation' : 'メインナビゲーション'}">
         <ul class="global-nav__list">
             <li class="global-nav__item">
                 <a href="${txt.topLink}">
@@ -173,9 +186,17 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (menuBtn && globalNav) {
         menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('is-open');
+            const isOpen = menuBtn.classList.toggle('is-open');
             globalNav.classList.toggle('is-active');
             document.body.classList.toggle('is-fixed');
+
+            // Update aria-expanded state and label
+            menuBtn.setAttribute('aria-expanded', isOpen.toString());
+            menuBtn.setAttribute('aria-label',
+                isOpen
+                    ? (isEn ? 'Close navigation menu' : 'ナビゲーションメニューを閉じる')
+                    : (isEn ? 'Open navigation menu' : 'ナビゲーションメニューを開く')
+            );
         });
 
         const navLinks = globalNav.querySelectorAll('a');
@@ -184,6 +205,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 menuBtn.classList.remove('is-open');
                 globalNav.classList.remove('is-active');
                 document.body.classList.remove('is-fixed');
+
+                // Reset aria-expanded state and label
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.setAttribute('aria-label',
+                    isEn ? 'Open navigation menu' : 'ナビゲーションメニューを開く'
+                );
             });
         });
     }

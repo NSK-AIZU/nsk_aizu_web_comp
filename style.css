@@ -10,6 +10,56 @@ body {
     font-family: "Zen Old Mincho", sans-serif;
     color: #fff;
 }
+
+/* -------------------------
+   Accessibility - Focus Indicators
+------------------------- */
+/* グローバルフォーカススタイル */
+*:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* リンクとボタンのフォーカス（より明確に） */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
+/* フォーカスビジブル（マウスクリック時は非表示、キーボード時のみ表示） */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
+/* 特定の要素用フォーカススタイル */
+.header__menu-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.calc-btn:focus-visible,
+.btn-arrow:focus-visible,
+.btn-submit:focus-visible,
+.btn-back-top:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
 .home {
     height: 100vh; /* トップページだけ画面いっぱいに固定 */
     display: flex;
