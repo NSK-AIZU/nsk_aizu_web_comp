@@ -50,11 +50,20 @@
 
   <url>
     <loc>https://terush.github.io/nsk_aizu_web_comp/contact.html</loc>
-    <lastmod>2025-12-30</lastmod>
+    <lastmod>2026-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://terush.github.io/nsk_aizu_web_comp/en/contact.html" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://terush.github.io/nsk_aizu_web_comp/contact.html" />
+  </url>
+
+  <url>
+    <loc>https://terush.github.io/nsk_aizu_web_comp/gallery/</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://terush.github.io/nsk_aizu_web_comp/gallery/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://terush.github.io/nsk_aizu_web_comp/gallery/" />
   </url>
 
   <!-- English Pages -->
@@ -105,11 +114,20 @@
 
   <url>
     <loc>https://terush.github.io/nsk_aizu_web_comp/en/contact.html</loc>
-    <lastmod>2025-12-30</lastmod>
+    <lastmod>2026-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://terush.github.io/nsk_aizu_web_comp/en/contact.html" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://terush.github.io/nsk_aizu_web_comp/contact.html" />
+  </url>
+
+  <url>
+    <loc>https://terush.github.io/nsk_aizu_web_comp/gallery/en/</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://terush.github.io/nsk_aizu_web_comp/gallery/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://terush.github.io/nsk_aizu_web_comp/gallery/" />
   </url>
 
 </urlset>
