@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日めくりギャラリー | NPO NSK_AIZU</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="祖母の絵と母の切手、日めくりギャラリー。1日に1作品、ランダムに表示される家族の思い出のアーカイブ。">
+    <meta name="keywords" content="ギャラリー, 絵画, 切手, アート, NSK_AIZU">
+    <link rel="canonical" href="https://terush.github.io/nsk_aizu_web_comp/gallery/">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="日めくりギャラリー | NPO NSK_AIZU">
+    <meta property="og:description" content="祖母の絵と母の切手、日めくりギャラリー。1日に1作品、ランダムに表示される家族の思い出のアーカイブ。">
+    <meta property="og:url" content="https://terush.github.io/nsk_aizu_web_comp/gallery/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="NPO NSK_AIZU">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="日めくりギャラリー | NPO NSK_AIZU">
+    <meta name="twitter:description" content="祖母の絵と母の切手、日めくりギャラリー。1日に1作品、ランダムに表示される家族の思い出のアーカイブ。">
+
+    <!-- Alternate Language -->
+    <link rel="alternate" hreflang="ja" href="https://terush.github.io/nsk_aizu_web_comp/gallery/">
+    <link rel="alternate" hreflang="en" href="https://terush.github.io/nsk_aizu_web_comp/gallery/en/">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="gallery.css?v=3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="gallery-page">
+    <header class="header" id="common-header"></header>
+
+    <main class="gallery-main" id="main-content" role="main">
+        <h1 class="visually-hidden">日めくりギャラリー</h1>
+
+        <!-- ローディング表示 -->
+        <div class="gallery-loading" id="gallery-loading">
+            <p>読み込み中...</p>
+        </div>
+
+        <!-- ギャラリーコンテンツ -->
+        <div class="gallery-container" id="gallery-container" style="display: none;">
+            <!-- 背景画像 -->
+            <div class="gallery-bg" id="gallery-bg"></div>
+
+            <!-- テキストオーバーレイ -->
+            <div class="gallery-overlay">
+                <div class="gallery-content">
+                    <p class="gallery-type" id="gallery-type"></p>
+                    <h2 class="gallery-title" id="gallery-title"></h2>
+                    <p class="gallery-description" id="gallery-description"></p>
+                    <p class="gallery-year" id="gallery-year"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- エラー表示 -->
+        <div class="gallery-error" id="gallery-error" style="display: none;">
+            <p>作品データの読み込みに失敗しました。</p>
+        </div>
+    </main>
+
+    <footer class="footer" id="common-footer"></footer>
+    <script src="../common.js"></script>
+    <script src="gallery.js"></script>
+</body>
+</html>

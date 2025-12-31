@@ -4,8 +4,21 @@
 // URLに '/en/' が含まれているかチェック
 const isEn = location.pathname.includes('/en/');
 
-// 相対パスのプレフィックス
-const path = isEn ? '../' : './';
+// galleryページかどうかをチェック
+const isGallery = location.pathname.includes('/gallery/');
+
+// 相対パスのプレフィックス（画像用）
+let path;
+if (isGallery && isEn) {
+    // gallery/en/ の場合
+    path = '../../images/';
+} else if (isGallery || isEn) {
+    // gallery/ または en/ の場合
+    path = '../images/';
+} else {
+    // ルートページの場合
+    path = 'images/';
+}
 
 // 言語別のテキスト設定
 const langData = {
@@ -13,6 +26,7 @@ const langData = {
         top: 'トップページ',
         vision: 'ビジョン',
         news: 'お知らせ',
+        gallery: '日めくりギャラリー',
         rice: '画面de田んぼ',
         about: '私たちについて',
         contact: 'お問い合わせ',
@@ -20,6 +34,7 @@ const langData = {
         topLink: 'index.html',
         visionLink: 'vision.html',
         newsLink: 'news.html',
+        galleryLink: 'gallery/index.html',
         riceLink: 'rice_calc.html',
         aboutLink: 'about.html',
         contactLink: 'contact.html',
@@ -32,6 +47,7 @@ const langData = {
         top: 'HOME',
         vision: 'OUR VISION',
         news: 'NEWS',
+        gallery: 'DAILY GALLERY',
         rice: 'RICE CALCULATOR',
         about: 'WHO WE ARE',
         contact: 'GET IN TOUCH',
@@ -39,6 +55,7 @@ const langData = {
         topLink: 'index.html',
         visionLink: 'vision.html',
         newsLink: 'news.html',
+        galleryLink: 'gallery/en/index.html',
         riceLink: 'rice_calc.html',
         aboutLink: 'about.html',
         contactLink: 'contact.html',
@@ -52,11 +69,31 @@ const langData = {
 // 現在の言語データを選択
 const txt = isEn ? langData.en : langData.ja;
 
-// ページごとの言語切り替えリンクの微調整
+// ページごとのリンク調整
 const currentFile = location.pathname.split('/').pop() || 'index.html';
-if (isEn) {
+
+// galleryページの場合、すべてのリンクにパスプレフィックスを追加
+if (isGallery) {
+    const linkPrefix = isEn ? '../../' : '../';
+    txt.topLink = linkPrefix + 'index.html';
+    txt.visionLink = linkPrefix + 'vision.html';
+    txt.newsLink = linkPrefix + 'news.html';
+    txt.galleryLink = isEn ? '../index.html' : 'index.html';
+    txt.riceLink = linkPrefix + 'rice_calc.html';
+    txt.aboutLink = linkPrefix + 'about.html';
+    txt.contactLink = linkPrefix + 'contact.html';
+
+    // 言語切り替えリンク
+    if (isEn) {
+        txt.switchJaLink = '../index.html';
+    } else {
+        txt.switchEnLink = 'en/index.html';
+    }
+} else if (isEn) {
+    // en/ページの場合
     txt.switchJaLink = '../' + currentFile;
 } else {
+    // ルートページの場合
     txt.switchEnLink = 'en/' + currentFile;
 }
 
@@ -117,6 +154,12 @@ const headerContent = `
                 <a href="${txt.newsLink}">
                     <span class="global-nav__en">- NEWS -</span>
                     <span class="global-nav__jp">${txt.news}</span>
+                </a>
+            </li>
+            <li class="global-nav__item">
+                <a href="${txt.galleryLink}">
+                    <span class="global-nav__en">- GALLERY -</span>
+                    <span class="global-nav__jp">${txt.gallery}</span>
                 </a>
             </li>
             <li class="global-nav__item">
