@@ -8,4 +8,4 @@ Allow: /
 # Disallow: /tmp/
 
 # Sitemap location
-Sitemap: https://terush.github.io/nsk_aizu_web_comp/sitemap.xml
+Sitemap: https://npo-nsk-aizu.org/sitemap.xml
