@@ -30,6 +30,7 @@ const langData = {
         rice: '画面de田んぼ',
         about: '私たちについて',
         contact: 'お問い合わせ',
+        education: '教育支援',
         // address: 削除しました
         topLink: 'index.html',
         visionLink: 'vision.html',
@@ -38,6 +39,7 @@ const langData = {
         riceLink: 'rice_calc.html',
         aboutLink: 'about.html',
         contactLink: 'contact.html',
+        educationLink: 'education/index.html',
         switchJaClass: 'is-active',
         switchEnClass: '',
         switchJaLink: isEn ? '../index.html' : '#',
@@ -51,6 +53,7 @@ const langData = {
         rice: 'RICE CALCULATOR',
         about: 'WHO WE ARE',
         contact: 'GET IN TOUCH',
+        education: 'EDUCATION',
         // address: Removed
         topLink: 'index.html',
         visionLink: 'vision.html',
@@ -59,6 +62,7 @@ const langData = {
         riceLink: 'rice_calc.html',
         aboutLink: 'about.html',
         contactLink: 'contact.html',
+        educationLink: 'education/index.html',
         switchJaClass: '',
         switchEnClass: 'is-active',
         switchJaLink: '../index.html',
@@ -82,6 +86,7 @@ if (isGallery) {
     txt.riceLink = linkPrefix + 'rice_calc.html';
     txt.aboutLink = linkPrefix + 'about.html';
     txt.contactLink = linkPrefix + 'contact.html';
+    txt.educationLink = linkPrefix + 'education/index.html';
 
     // 言語切り替えリンク
     if (isEn) {
@@ -172,6 +177,12 @@ const headerContent = `
                 <a href="${txt.aboutLink}">
                     <span class="global-nav__en">- ABOUT US -</span>
                     <span class="global-nav__jp">${txt.about}</span>
+                </a>
+            </li>
+            <li class="global-nav__item">
+                <a href="${txt.educationLink}">
+                    <span class="global-nav__en">- EDUCATION -</span>
+                    <span class="global-nav__jp">${txt.education}</span>
                 </a>
             </li>
             <li class="global-nav__item">

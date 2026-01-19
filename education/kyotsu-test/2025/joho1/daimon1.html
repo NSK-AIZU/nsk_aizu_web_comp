@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1問 解説 - 2025年共通テスト情報I | NPO法人NSK_AIZU</title>
+    <meta name="description" content="2025年共通テスト情報I 第1問の詳細解説。デジタル署名、IPv6、7セグメントLED、チェックディジット、フィッツの法則について。">
+    <meta name="keywords" content="共通テスト,情報I,2025,第1問,デジタル署名,IPv6,チェックディジット,フィッツの法則">
+    <link rel="canonical" href="https://npo-nsk-aizu.org/education/kyotsu-test/2025/joho1/daimon1.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../../../favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../../../favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../../education.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="edu-hero">
+        <h1 class="edu-hero__title">- QUESTION 1 -</h1>
+        <p class="edu-hero__subtitle">第1問 解説 (20点)</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="edu-container">
+        <nav class="breadcrumb">
+            <a href="../../../../index.html">HOME</a> &gt;
+            <a href="../../../index.html">教育支援</a> &gt;
+            <a href="index.html">2025年情報I</a> &gt;
+            第1問
+        </nav>
+
+        <!-- Page Navigation -->
+        <nav class="page-nav">
+            <a href="index.html" class="page-nav__link">← 目次に戻る</a>
+            <a href="daimon2.html" class="page-nav__link">第2問へ →</a>
+        </nav>
+
+        <!-- 問1 -->
+        <article class="problem">
+            <h2 class="problem__title">01. デジタル署名とIPv6</h2>
+
+            <div class="problem-summary">
+                <h3 class="problem-summary__title">SUMMARY</h3>
+                <p class="problem-summary__text">デジタル署名とIPv6に関する穴埋め問題</p>
+            </div>
+
+            <div class="answer">
+                <h3 class="answer__title">ANSWER</h3>
+                <dl class="answer__list">
+                    <dt class="answer__term">ア</dt>
+                    <dd class="answer__desc"><span class="answer__value">2</span> (改ざんされていないか)</dd>
+                    <dt class="answer__term">イ</dt>
+                    <dd class="answer__desc"><span class="answer__value">2</span> (インターネットに直接接続する機器の増加に対応するため)</dd>
+                </dl>
+            </div>
+
+            <div class="explanation">
+                <h3 class="explanation__title">EXPLANATION</h3>
+
+                <h4 class="explanation__subtitle">ア：デジタル署名の機能</h4>
+                <p class="explanation__text">デジタル署名には2つの主要な機能があります：</p>
+                <ol class="explanation__list">
+                    <li><strong>本人認証（真正性）</strong>：発信者が本人であることの確認</li>
+                    <li><strong>完全性の保証</strong>：情報が改ざんされていないことの確認</li>
+                </ol>
+                <p class="explanation__text">問題文の前半で「発信者が本人であることを確認するため」と既に述べられているため、空欄アには<strong>「改ざんされていないか」</strong>が入ります。</p>
+
+                <h4 class="explanation__subtitle">イ：IPv6導入の理由</h4>
+                <p class="explanation__text">IPv4（32ビット）では約43億個のIPアドレスしか割り当てられませんでした。インターネットの普及とIoT機器の増加により、このアドレス空間では不足することが明らかになりました。</p>
+                <p class="explanation__text">IPv6（128ビット）では、天文学的な数のアドレスを割り当てることができ、実質的にアドレス枯渇の問題を解決しました。</p>
+                <p class="explanation__text">したがって、空欄イには<strong>「インターネットに直接接続する機器の増加に対応するため」</strong>が入ります。</p>
+            </div>
+
+            <div class="tips">
+                <h3 class="tips__title">KEY POINTS</h3>
+                <ul class="tips__list">
+                    <li>デジタル署名の2大機能：(1)本人認証、(2)改ざん検知（完全性）</li>
+                    <li>IPv6の主目的：アドレス不足への対応（32bit → 128bit）</li>
+                    <li>IoT（Internet of Things）機器の増加が主な要因</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 問2 -->
+        <article class="problem">
+            <h2 class="problem__title">02. 7セグメントLEDとエラーコード</h2>
+
+            <div class="problem-summary">
+                <h3 class="problem-summary__title">SUMMARY</h3>
+                <p class="problem-summary__text">7セグメントLEDの組み合わせ数とエラーコードの桁数に関する問題</p>
+            </div>
+
+            <div class="answer">
+                <h3 class="answer__title">ANSWER</h3>
+                <dl class="answer__list">
+                    <dt class="answer__term">ウ・エ・オ</dt>
+                    <dd class="answer__desc"><span class="answer__value">128</span> (通り)</dd>
+                    <dt class="answer__term">カ</dt>
+                    <dd class="answer__desc"><span class="answer__value">5</span> (桁)</dd>
+                </dl>
+            </div>
+
+            <div class="explanation">
+                <h3 class="explanation__title">EXPLANATION</h3>
+
+                <h4 class="explanation__subtitle">ウ・エ・オ：7セグメントLEDの組み合わせ</h4>
+                <p class="explanation__text">7セグメントLEDは、a〜gの7個のLEDで構成されています。各LEDは「点灯」または「消灯」の2つの状態を取ることができます。</p>
+                <p class="explanation__text">したがって、全体の組み合わせ数は：</p>
+                <p class="formula">2&#8311; = 128 通り</p>
+
+                <h4 class="explanation__subtitle">カ：エラーコードの最小桁数</h4>
+                <p class="explanation__text">エラーコードの構成：</p>
+                <ul class="explanation__list">
+                    <li>1桁目：大文字アルファベット8種類</li>
+                    <li>2桁目：小文字アルファベット5種類</li>
+                    <li>3桁目以降：数字10種類（0〜9）</li>
+                </ul>
+                <p class="explanation__text">5,000種類以上のエラーコードを表示するための条件：</p>
+                <p class="formula">8 × 5 × 10&#739; ≥ 5,000</p>
+                <p class="formula">40 × 10&#739; ≥ 5,000 → 10&#739; ≥ 125</p>
+                <p class="explanation__text">x = 3のとき 10&#179; = 1,000 > 125 なので、数字部分は最低3桁必要。全体では <strong>5桁</strong> が必要です。</p>
+            </div>
+
+            <div class="tips">
+                <h3 class="tips__title">KEY POINTS</h3>
+                <ul class="tips__list">
+                    <li>2の累乗：2&#8310;=64, 2&#8311;=128, 2&#8312;=256</li>
+                    <li>組み合わせの数：各要素の選択肢数を掛け合わせる</li>
+                    <li>不等式を解いて最小値を求める</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 問3 -->
+        <article class="problem">
+            <h2 class="problem__title">03. チェックディジット</h2>
+
+            <div class="problem-summary">
+                <h3 class="problem-summary__title">SUMMARY</h3>
+                <p class="problem-summary__text">チェックディジットに関する問題（計算と誤り検出）</p>
+            </div>
+
+            <div class="answer">
+                <h3 class="answer__title">ANSWER</h3>
+                <dl class="answer__list">
+                    <dt class="answer__term">キ</dt>
+                    <dd class="answer__desc"><span class="answer__value">7</span></dd>
+                    <dt class="answer__term">ク</dt>
+                    <dd class="answer__desc"><span class="answer__value">3</span> (連続する二つの桁の数字の順序を逆にする)</dd>
+                </dl>
+            </div>
+
+            <div class="explanation">
+                <h3 class="explanation__title">EXPLANATION</h3>
+
+                <h4 class="explanation__subtitle">キ：チェックディジットの計算</h4>
+                <p class="explanation__text">利用者ID「22609」に対して、生成方法Bでチェックディジットを計算します。</p>
+                <p class="explanation__text"><strong>生成方法B</strong>の手順：奇数桁を3倍、偶数桁はそのまま、合計を10で割った余りRを求め、10-Rがチェックディジット。</p>
+                <p class="explanation__text">利用者ID「22609」の場合：</p>
+                <ul class="explanation__list">
+                    <li>N&#8325; = 2（奇数桁）→ 2×3 = 6</li>
+                    <li>N&#8324; = 2（偶数桁）→ 2</li>
+                    <li>N&#8323; = 6（奇数桁）→ 6×3 = 18</li>
+                    <li>N&#8322; = 0（偶数桁）→ 0</li>
+                    <li>N&#8321; = 9（奇数桁）→ 9×3 = 27</li>
+                </ul>
+                <p class="formula">合計：6 + 2 + 18 + 0 + 27 = 53</p>
+                <p class="formula">R = 53 % 10 = 3 → C = 10 - 3 = 7</p>
+
+                <h4 class="explanation__subtitle">ク：生成方法Bで検出できる入力ミス</h4>
+                <p class="explanation__text">生成方法Bは奇数桁だけを3倍にするため、<strong>連続する二つの桁の順序を逆にすると、重み付けが変わり検出できます</strong>。</p>
+            </div>
+
+            <div class="tips">
+                <h3 class="tips__title">KEY POINTS</h3>
+                <ul class="tips__list">
+                    <li>チェックディジット：入力ミスを検出するための検証用数字</li>
+                    <li>重み付け方式：桁ごとに異なる係数で、より多くのエラーを検出</li>
+                    <li>順序の入れ替え：重み付けがあれば検出可能</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 問4 -->
+        <article class="problem">
+            <h2 class="problem__title">04. フィッツの法則</h2>
+
+            <div class="problem-summary">
+                <h3 class="problem-summary__title">SUMMARY</h3>
+                <p class="problem-summary__text">フィッツの法則に関する問題（UI設計）</p>
+            </div>
+
+            <div class="answer">
+                <h3 class="answer__title">ANSWER</h3>
+                <dl class="answer__list">
+                    <dt class="answer__term">ケ</dt>
+                    <dd class="answer__desc"><span class="answer__value">2</span>（画面右上隅）</dd>
+                    <dt class="answer__term">コ</dt>
+                    <dd class="answer__desc"><span class="answer__value">0</span>（低い）</dd>
+                    <dt class="answer__term">サ</dt>
+                    <dd class="answer__desc"><span class="answer__value">1</span>（マウスカーソルの位置から遠い場所）</dd>
+                </dl>
+            </div>
+
+            <div class="explanation">
+                <h3 class="explanation__title">EXPLANATION</h3>
+
+                <h4 class="explanation__subtitle">フィッツの法則とは</h4>
+                <p class="explanation__text">フィッツの法則は、ポインティングデバイスで対象物を指し示すのに要する時間を予測する法則です。</p>
+                <ul class="explanation__list">
+                    <li>対象物が<strong>大きいほど</strong>、到達時間が短くなる</li>
+                    <li>対象物への<strong>距離が短いほど</strong>、到達時間が短くなる</li>
+                </ul>
+
+                <h4 class="explanation__subtitle">ケ：最も短時間で指し示せる対象</h4>
+                <p class="explanation__text">ディスプレイの端では、マウスカーソルがそれ以上外に出られないため、<strong>オーバーシュートが発生しません</strong>。画面右上隅は、カーソル位置から近く、2つの端が交わるため最も有利です。</p>
+
+                <h4 class="explanation__subtitle">コ・サ：メニュー項目の配置</h4>
+                <p class="explanation__text">フィッツの法則に沿った設計では、<strong>よく使う項目ほどアクセスしやすい場所に配置</strong>すべきです。項目5は利用頻度が低いため、意図的に遠くに配置されています。</p>
+            </div>
+
+            <div class="tips">
+                <h3 class="tips__title">KEY POINTS</h3>
+                <ul class="tips__list">
+                    <li>フィッツの法則：対象が大きく近いほど、操作時間が短い</li>
+                    <li>画面の端：実質的に無限大の大きさとして機能</li>
+                    <li>UI設計：よく使う機能は近く大きく配置</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Page Navigation -->
+        <nav class="page-nav">
+            <a href="index.html" class="page-nav__link">← 目次に戻る</a>
+            <a href="daimon2.html" class="page-nav__link">第2問へ →</a>
+        </nav>
+    </main>
+
+    <!-- Footer -->
+    <footer class="edu-footer">
+        <p class="edu-footer__copyright">&copy; 2025 NPO NSK_AIZU</p>
+        <div class="edu-footer__links">
+            <a href="../../../index.html">EDUCATION</a>
+            <a href="../../../../index.html">HOME</a>
+        </div>
+    </footer>
+</body>
+</html>
