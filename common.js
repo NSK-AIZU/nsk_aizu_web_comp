@@ -179,12 +179,12 @@ const headerContent = `
                     <span class="global-nav__jp">${txt.about}</span>
                 </a>
             </li>
-            <li class="global-nav__item">
+            ${!isEn ? `<li class="global-nav__item">
                 <a href="${txt.educationLink}">
                     <span class="global-nav__en">- EDUCATION -</span>
                     <span class="global-nav__jp">${txt.education}</span>
                 </a>
-            </li>
+            </li>` : ''}
             <li class="global-nav__item">
                 <a href="${txt.contactLink}">
                     <span class="global-nav__en">- CONTACT -</span>
