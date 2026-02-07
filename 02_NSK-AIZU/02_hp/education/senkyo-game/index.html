@@ -338,8 +338,11 @@
                 </div>
             </div>
 
+            <!-- Deadline Countdown -->
+            <div id="deadline-countdown" style="margin-top:16px;padding:12px 16px;border-radius:8px;text-align:center;font-weight:bold;"></div>
+
             <!-- Submit -->
-            <div style="margin-top:20px">
+            <div style="margin-top:12px">
                 <button id="submit-btn" class="btn btn-primary" onclick="openConfirmModal()">予測を確認する</button>
             </div>
         </div>
@@ -1091,8 +1094,19 @@
         return new Date() > SUBMISSION_DEADLINE;
     }
 
-    function checkDeadlineAndUpdateUI() {
-        if (isDeadlinePassed()) {
+    function updateDeadlineCountdown() {
+        const now = new Date();
+        const diff = SUBMISSION_DEADLINE - now;
+        const el = document.getElementById('deadline-countdown');
+        if (!el) return;
+
+        if (diff <= 0) {
+            // 締切済み
+            el.style.background = '#fee';
+            el.style.border = '1px solid #c00';
+            el.style.color = '#c00';
+            el.textContent = '回答の受付は2月9日 18:00に締め切りました';
+
             const btn = document.getElementById('submit-btn');
             if (btn) {
                 btn.disabled = true;
@@ -1100,17 +1114,35 @@
                 btn.style.opacity = '0.5';
                 btn.style.cursor = 'not-allowed';
             }
-            // 締切メッセージを表示
-            let msg = document.getElementById('deadline-message');
-            if (!msg) {
-                msg = document.createElement('div');
-                msg.id = 'deadline-message';
-                msg.style.cssText = 'background:#fee;border:1px solid #c00;color:#c00;padding:12px 16px;border-radius:8px;margin-bottom:16px;text-align:center;font-weight:bold;';
-                msg.textContent = '⏰ 回答の受付は2月9日 18:00に締め切りました';
-                const submitDiv = btn?.parentElement;
-                if (submitDiv) submitDiv.parentElement.insertBefore(msg, submitDiv);
-            }
+            return;
         }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        let timeStr = '';
+        if (days > 0) timeStr += days + '日 ';
+        timeStr += hours + '時間 ' + minutes + '分 ' + seconds + '秒';
+
+        // 残り1時間以内は赤系、それ以外は青系
+        if (diff < 1000 * 60 * 60) {
+            el.style.background = '#fff3f0';
+            el.style.border = '1px solid #e74c3c';
+            el.style.color = '#e74c3c';
+        } else {
+            el.style.background = '#f0f7ff';
+            el.style.border = '1px solid #3498db';
+            el.style.color = '#2c3e50';
+        }
+        el.innerHTML = '締切まであと <span style="font-size:1.2em">' + timeStr + '</span>';
+    }
+
+    function checkDeadlineAndUpdateUI() {
+        updateDeadlineCountdown();
+        // 1秒ごとにカウントダウンを更新
+        setInterval(updateDeadlineCountdown, 1000);
     }
 
     // Confirmation
