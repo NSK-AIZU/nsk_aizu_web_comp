@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Japanese Pages -->
+  <url>
+    <loc>https://npo-nsk-aizu.org/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/vision.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/vision.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/vision.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/news.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/news.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/news.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/rice_calc.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/rice_calc.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/rice_calc.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/about.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/about.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/about.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/contact.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/contact.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/contact.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/gallery/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/gallery/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/gallery/" />
+  </url>
+
+  <!-- English Pages -->
+  <url>
+    <loc>https://npo-nsk-aizu.org/en/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/en/vision.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/vision.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/vision.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/en/news.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/news.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/news.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/en/rice_calc.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/rice_calc.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/rice_calc.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/en/about.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/about.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/about.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/en/contact.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/contact.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/contact.html" />
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/gallery/en/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/gallery/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/gallery/" />
+  </url>
+
+  <!-- Education Pages -->
+  <url>
+    <loc>https://npo-nsk-aizu.org/education/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/education/kyotsu-test/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/education/kyotsu-test/2025/joho1/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/education/kyotsu-test/2025/joho1/daimon1.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/education/kyotsu-test/2025/joho1/daimon2.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/education/kyotsu-test/2025/joho1/daimon3.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/education/kyotsu-test/2025/joho1/daimon4.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://npo-nsk-aizu.org/education/senkyo-game/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

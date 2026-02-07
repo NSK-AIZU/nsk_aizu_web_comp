@@ -89,6 +89,14 @@
         .modal-footer { padding: 16px; border-top: 1px solid #ddd; display: flex; gap: 8px; justify-content: flex-end; }
         .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #666; }
 
+        /* Site Navigation */
+        .site-nav { background: #111; padding: 10px 0; font-size: 13px; }
+        .site-nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .site-nav a { color: #ccc; text-decoration: none; }
+        .site-nav a:hover { color: #fff; text-decoration: underline; }
+        .site-nav .breadcrumb { display: flex; gap: 6px; align-items: center; }
+        .site-nav .breadcrumb span { color: #666; }
+
         /* Participants List */
         .participant-item { padding: 12px; border: 1px solid #ddd; margin-bottom: 8px; cursor: pointer; }
         .participant-item:hover { background: #f9f9f9; }
@@ -192,6 +200,19 @@
         </div>
     </div>
 
+
+    <!-- Site Navigation -->
+    <div class="site-nav">
+        <div class="container breadcrumb">
+            <div class="breadcrumb">
+                <a href="/">NSK_AIZU</a>
+                <span>›</span>
+                <a href="/education/">教育支援</a>
+                <span>›</span>
+                <span style="color:#999;">選挙の達人</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header>
