@@ -374,7 +374,7 @@ button:focus-visible {
     max-width: 1200px;
     margin: 0 auto;
     /* vh単位で画面高さに連動（ヘッダー避け + 上下余白） */
-    padding: max(105px, 12vh) 40px max(10px, 1.5vh);
+    padding: max(95px, 10vh) 40px max(8px, 1vh);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -387,7 +387,7 @@ button:focus-visible {
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr;
     grid-template-rows: 1.1fr 0.9fr;
-    gap: clamp(12px, 3vh, 40px); /* 画面高さに応じて12px〜40px */
+    gap: clamp(8px, 2vh, 40px); /* 画面高さに応じて8px〜40px */
 }
 
 /* --- カード共通スタイル --- */
@@ -405,7 +405,7 @@ button:focus-visible {
 }
 
 .card__content {
-    padding: 30px;
+    padding: clamp(15px, 3vh, 30px);
     height: 100%;
     display: flex;
     flex-direction: column;
