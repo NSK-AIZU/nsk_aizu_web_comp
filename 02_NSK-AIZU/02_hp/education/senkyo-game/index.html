@@ -1087,8 +1087,8 @@
         document.getElementById('pitari-seats').textContent = max || '-';
     }
 
-    // 回答締切: 2026年2月9日 18:00 JST
-    const SUBMISSION_DEADLINE = new Date('2026-02-09T18:00:00+09:00');
+    // 回答締切: 2026年2月8日 18:00 JST
+    const SUBMISSION_DEADLINE = new Date('2026-02-08T18:00:00+09:00');
 
     function isDeadlinePassed() {
         return new Date() > SUBMISSION_DEADLINE;
@@ -1105,7 +1105,7 @@
             el.style.background = '#fee';
             el.style.border = '1px solid #c00';
             el.style.color = '#c00';
-            el.textContent = '回答の受付は2月9日 18:00に締め切りました';
+            el.textContent = '回答の受付は2月8日 18:00に締め切りました';
 
             const btn = document.getElementById('submit-btn');
             if (btn) {
@@ -1149,7 +1149,7 @@
     function openConfirmModal() {
         // 締切チェック
         if (isDeadlinePassed()) {
-            alert('回答の受付は2月9日 18:00に締め切りました。');
+            alert('回答の受付は2月8日 18:00に締め切りました。');
             checkDeadlineAndUpdateUI();
             return;
         }
@@ -1231,7 +1231,7 @@
 
         // 締切チェック（二重チェック）
         if (isDeadlinePassed()) {
-            alert('回答の受付は2月9日 18:00に締め切りました。');
+            alert('回答の受付は2月8日 18:00に締め切りました。');
             closeConfirmModal();
             checkDeadlineAndUpdateUI();
             return;
