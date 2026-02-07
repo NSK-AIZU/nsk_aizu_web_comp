@@ -265,7 +265,7 @@ button:focus-visible {
     color: #fff;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     /* paddingを少し減らしてスリムに */
-    padding: 30px 0;
+    padding: clamp(10px, 2vh, 30px) 0;
     flex-shrink: 0; /* これで絶対に潰れたり隠れたりしなくなります */
 }
 
@@ -374,7 +374,7 @@ button:focus-visible {
     max-width: 1200px;
     margin: 0 auto;
     /* vh単位で画面高さに連動（ヘッダー避け + 上下余白） */
-    padding: max(95px, 10vh) 40px max(8px, 1vh);
+    padding: max(90px, 9vh) 40px max(5px, 0.5vh);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
