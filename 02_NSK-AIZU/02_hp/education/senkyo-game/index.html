@@ -807,6 +807,7 @@
         initUI();
         initRefBars();
         checkAdminAccess();
+        checkDeadlineAndUpdateUI();
     });
 
     // URLパラメータで管理者アクセスをチェック
@@ -1083,8 +1084,44 @@
         document.getElementById('pitari-seats').textContent = max || '-';
     }
 
+    // 回答締切: 2026年2月9日 18:00 JST
+    const SUBMISSION_DEADLINE = new Date('2026-02-09T18:00:00+09:00');
+
+    function isDeadlinePassed() {
+        return new Date() > SUBMISSION_DEADLINE;
+    }
+
+    function checkDeadlineAndUpdateUI() {
+        if (isDeadlinePassed()) {
+            const btn = document.getElementById('submit-btn');
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = '回答受付は終了しました';
+                btn.style.opacity = '0.5';
+                btn.style.cursor = 'not-allowed';
+            }
+            // 締切メッセージを表示
+            let msg = document.getElementById('deadline-message');
+            if (!msg) {
+                msg = document.createElement('div');
+                msg.id = 'deadline-message';
+                msg.style.cssText = 'background:#fee;border:1px solid #c00;color:#c00;padding:12px 16px;border-radius:8px;margin-bottom:16px;text-align:center;font-weight:bold;';
+                msg.textContent = '⏰ 回答の受付は2月9日 18:00に締め切りました';
+                const submitDiv = btn?.parentElement;
+                if (submitDiv) submitDiv.parentElement.insertBefore(msg, submitDiv);
+            }
+        }
+    }
+
     // Confirmation
     function openConfirmModal() {
+        // 締切チェック
+        if (isDeadlinePassed()) {
+            alert('回答の受付は2月9日 18:00に締め切りました。');
+            checkDeadlineAndUpdateUI();
+            return;
+        }
+
         const name = document.getElementById('participant-name').value.trim();
         if (!name) return alert('参加者名を入力してください');
 
@@ -1159,6 +1196,14 @@
 
     async function confirmSubmit() {
         if (!pendingPrediction) return;
+
+        // 締切チェック（二重チェック）
+        if (isDeadlinePassed()) {
+            alert('回答の受付は2月9日 18:00に締め切りました。');
+            closeConfirmModal();
+            checkDeadlineAndUpdateUI();
+            return;
+        }
 
         const data = {
             ...pendingPrediction,
