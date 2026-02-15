@@ -1,0 +1,401 @@
+/* ===================================
+   ギャラリーページ専用スタイル（リニューアル版）
+=================================== */
+
+/* セクション共通 */
+.gallery-section {
+    padding: clamp(60px, 8vh, 120px) 0;
+}
+
+.gallery-section__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+}
+
+.gallery-label {
+    display: inline-block;
+    font-family: var(--font-serif-en);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--color-gold);
+    margin-bottom: 16px;
+}
+
+.gallery-section__heading {
+    font-family: var(--font-serif-jp);
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.gallery-section__lead {
+    font-family: var(--font-serif-jp);
+    font-size: 14px;
+    line-height: 2.2;
+    color: var(--color-text-muted);
+    margin-bottom: 48px;
+}
+
+/* ダーク背景セクション（活動の記録） */
+.gallery-section--activity {
+    background-color: var(--color-dark);
+}
+
+.gallery-section--activity .gallery-section__heading {
+    color: #F0EDE6;
+}
+
+.gallery-section--activity .gallery-section__lead {
+    color: #A89B8C;
+}
+
+/* ===================================
+   グリッドレイアウト
+=================================== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.gallery-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    padding: 40px 0;
+}
+
+/* カード */
+.gallery-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    background: var(--color-bg-alt);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-card:hover .gallery-card__image {
+    transform: scale(1.05);
+}
+
+.gallery-card__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 16px 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover .gallery-card__overlay {
+    opacity: 1;
+}
+
+.gallery-card__title {
+    font-family: var(--font-serif-jp);
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1.5;
+}
+
+/* 活動写真グリッド */
+.gallery-grid--activity .gallery-card {
+    background: #2A2520;
+}
+
+/* ===================================
+   ライトボックス
+=================================== */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.is-visible {
+    opacity: 1;
+}
+
+.lightbox__close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 36px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    z-index: 10001;
+    line-height: 1;
+    padding: 8px;
+}
+
+.lightbox__close:hover {
+    opacity: 1;
+}
+
+.lightbox__content {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    max-width: 1000px;
+    max-height: 85vh;
+    padding: 0 60px;
+    width: 100%;
+}
+
+.lightbox__image-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.lightbox__image {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox__info {
+    flex: 0 0 320px;
+    text-align: left;
+}
+
+.lightbox__type {
+    font-family: var(--font-serif-en);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--color-gold);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.lightbox__title {
+    font-family: var(--font-serif-jp);
+    font-size: 22px;
+    font-weight: 500;
+    color: #F0EDE6;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.lightbox__description {
+    font-family: var(--font-serif-jp);
+    font-size: 13px;
+    line-height: 2.2;
+    color: #A89B8C;
+}
+
+/* ナビゲーションボタン */
+.lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 48px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    padding: 16px;
+    line-height: 1;
+}
+
+.lightbox__nav:hover {
+    opacity: 1;
+}
+
+.lightbox__nav--prev {
+    left: 12px;
+}
+
+.lightbox__nav--next {
+    right: 12px;
+}
+
+/* ===================================
+   CTA
+=================================== */
+.gallery-cta {
+    padding: 80px 0;
+    text-align: center;
+    background: var(--color-bg);
+}
+
+.gallery-cta__inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.gallery-cta__text {
+    font-family: var(--font-serif-jp);
+    font-size: 15px;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+    line-height: 1.8;
+}
+
+.gallery-cta__link {
+    display: inline-block;
+    font-family: var(--font-serif-jp);
+    font-size: 14px;
+    color: var(--color-gold);
+    text-decoration: none;
+    border: 1px solid var(--color-gold);
+    padding: 14px 40px;
+    border-radius: 40px;
+    transition: all 0.3s ease;
+}
+
+.gallery-cta__link:hover {
+    background: var(--color-gold);
+    color: #fff;
+}
+
+/* ===================================
+   レスポンシブ
+=================================== */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .gallery-card__overlay {
+        opacity: 1;
+        padding: 12px 10px 10px;
+    }
+
+    .gallery-card__title {
+        font-size: 11px;
+    }
+
+    /* ライトボックス：縦並び */
+    .lightbox__content {
+        flex-direction: column;
+        gap: 24px;
+        padding: 60px 20px 40px;
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+
+    .lightbox__image-wrap {
+        flex: none;
+        width: 100%;
+    }
+
+    .lightbox__image {
+        max-height: 45vh;
+    }
+
+    .lightbox__info {
+        flex: none;
+        width: 100%;
+        text-align: center;
+    }
+
+    .lightbox__title {
+        font-size: 18px;
+    }
+
+    .lightbox__description {
+        font-size: 12px;
+        line-height: 2.0;
+    }
+
+    .lightbox__nav {
+        font-size: 32px;
+    }
+
+    .lightbox__nav--prev {
+        left: 4px;
+    }
+
+    .lightbox__nav--next {
+        right: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .gallery-section__lead {
+        font-size: 13px;
+        margin-bottom: 32px;
+    }
+
+    .gallery-cta {
+        padding: 60px 0;
+    }
+}
+
+/* フェードインアニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-card {
+    animation: fadeInUp 0.5s ease-out both;
+}
+
+.gallery-card:nth-child(1) { animation-delay: 0.05s; }
+.gallery-card:nth-child(2) { animation-delay: 0.10s; }
+.gallery-card:nth-child(3) { animation-delay: 0.15s; }
+.gallery-card:nth-child(4) { animation-delay: 0.20s; }
+.gallery-card:nth-child(5) { animation-delay: 0.25s; }
+.gallery-card:nth-child(6) { animation-delay: 0.30s; }
+.gallery-card:nth-child(7) { animation-delay: 0.35s; }
+.gallery-card:nth-child(8) { animation-delay: 0.40s; }
+.gallery-card:nth-child(9) { animation-delay: 0.45s; }
+.gallery-card:nth-child(10) { animation-delay: 0.50s; }
+.gallery-card:nth-child(11) { animation-delay: 0.55s; }
+.gallery-card:nth-child(12) { animation-delay: 0.60s; }

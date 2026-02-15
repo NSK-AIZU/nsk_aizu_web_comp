@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画面de田んぼ | NSK_AIZU</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="画面de田んぼ - もしもこの画面が田んぼだったら？あなたの画面サイズから収穫できるお米の量を計算する、楽しい農業シミュレーター。">
+    <meta name="keywords" content="NSK_AIZU, 画面de田んぼ, お米, 田んぼ, 農業, シミュレーター">
+    <link rel="canonical" href="https://npo-nsk-aizu.org/rice_calc" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="画面de田んぼ | NSK_AIZU">
+    <meta property="og:description" content="もしもこの画面が田んぼだったら？あなたの画面サイズから収穫できるお米の量を計算します。">
+    <meta property="og:image" content="https://npo-nsk-aizu.org/images/ogp.jpg">
+    <meta property="og:url" content="https://npo-nsk-aizu.org/rice_calc">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="NPO NSK_AIZU">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@NSK_AIZU">
+    <meta name="twitter:title" content="画面de田んぼ | NSK_AIZU">
+    <meta name="twitter:description" content="もしもこの画面が田んぼだったら？あなたの画面サイズから収穫できるお米の量を計算します。">
+    <meta name="twitter:image" content="https://npo-nsk-aizu.org/images/ogp.jpg">
+
+    <!-- Alternate Language -->
+    <link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/rice_calc">
+    <link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/rice_calc">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* rice_calc.html 専用スタイル */
+        .rice-calc-main {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* メインコンテナ（カード） */
+        .container {
+            background-color: #000;
+            border: 1px solid #333;
+            width: 100%;
+            max-width: 700px;
+            border-radius: 8px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .container:hover {
+            border-color: #666;
+        }
+
+        /* タイトル・テキスト */
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.5;
+            font-family: "Zen Old Mincho", sans-serif;
+        }
+
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.875rem;
+            color: #888;
+            letter-spacing: 0.15em;
+            margin-bottom: 35px;
+        }
+
+        .description {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            line-height: 1.9;
+        }
+
+        /* 結果表示ボックス - Level 1: 収穫量 */
+        .result-box {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 35px 30px;
+            margin-bottom: 25px;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #888;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .screen-size-text {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 25px;
+            font-family: "Zen Old Mincho", sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.15);
+            margin: 25px 0;
+        }
+
+        .amount-text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin: 20px 0;
+            font-family: 'Cinzel', serif;
+        }
+
+        .unit {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-left: 5px;
+            font-family: "Zen Old Mincho", sans-serif;
+        }
+
+        /* Level 2: お茶碗判定エリア（最重要） */
+        .bowl-status {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 25px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 不足の場合（警告スタイル） */
+        .bowl-status.shortage {
+            border-color: rgba(255, 100, 100, 0.4);
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.08) 0%, rgba(255, 100, 100, 0.02) 100%);
+        }
+
+        /* 充足の場合（成功スタイル） */
+        .bowl-status.sufficient {
+            border-color: rgba(100, 255, 150, 0.4);
+            background: linear-gradient(135deg, rgba(100, 255, 150, 0.08) 0%, rgba(100, 255, 150, 0.02) 100%);
+        }
+
+        .bowl-message {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .bowl-status.shortage .bowl-message {
+            color: #ff9999;
+        }
+
+        .bowl-status.sufficient .bowl-message {
+            color: #99ffbb;
+        }
+
+        .bowl-detail {
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .bowl-detail .emphasis {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            margin: 0 8px;
+            display: inline-block;
+        }
+
+        .bowl-status.shortage .bowl-detail .emphasis {
+            color: #ff6666;
+        }
+
+        .bowl-status.sufficient .bowl-detail .emphasis {
+            color: #66ff99;
+        }
+
+        /* Level 3: 詳細情報 */
+        .detail-text {
+            font-size: 0.875rem;
+            color: #999;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        /* ビジュアライゼーション（米粒） */
+        .visual-area {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .visual-label {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+
+        #visual-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            min-height: 60px;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .grain {
+            width: 10px;
+            height: 18px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            display: inline-block;
+            box-shadow: 0 1px 3px rgba(255, 255, 255, 0.15);
+        }
+
+        /* ボタン */
+        .calc-btn {
+            background-color: transparent;
+            color: #fff;
+            font-weight: 400;
+            padding: 15px 40px;
+            border-radius: 4px;
+            width: auto;
+            min-width: 220px;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            font-family: "Zen Old Mincho", sans-serif;
+            letter-spacing: 0.1em;
+        }
+
+        .calc-btn:hover {
+            background-color: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .calc-btn:active {
+            transform: translateY(1px);
+        }
+
+        .note-text {
+            margin-top: 35px;
+            font-size: 0.75rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .rice-calc-main {
+                padding-top: 100px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .container {
+                padding: 35px 25px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .amount-text {
+                font-size: 2.5rem;
+            }
+
+            .bowl-message {
+                font-size: 1.1rem;
+            }
+
+            .bowl-detail {
+                font-size: 1rem;
+            }
+
+            .bowl-detail .emphasis {
+                font-size: 2rem;
+            }
+
+            .calc-btn {
+                width: 100%;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body class="subpage">
+    <header class="header" id="common-header"></header>
+
+    <main class="rice-calc-main" id="main-content" role="main">
+        <div class="container">
+        <h1>もしもこの画面が<br>田んぼだったら？</h1>
+
+        <p class="subtitle">| SCREEN DE TANBO</p>
+
+        <p class="description">
+            あなたの画面サイズから、1シーズン（年1回）で収穫できるお米（炊いたご飯）の量を計算します。
+        </p>
+
+        <!-- Level 3: 画面サイズ -->
+        <div class="result-box">
+            <p class="label">画面サイズ（推測値）</p>
+            <p id="screen-size" class="screen-size-text">-- cm × -- cm</p>
+
+            <div class="divider"></div>
+
+            <!-- Level 1: 収穫量 -->
+            <p class="label">収穫できるご飯の量（1シーズン）</p>
+            <p class="amount-text">
+                <span id="rice-amount">0.0</span><span class="unit">g</span>
+            </p>
+
+            <p id="detail-info" class="detail-text">
+                米粒換算: 約 -- 粒
+            </p>
+        </div>
+
+        <!-- Level 2: お茶碗判定（最重要） -->
+        <div id="bowl-status" class="bowl-status">
+            <p id="bowl-message" class="bowl-message">計算中...</p>
+            <p id="bowl-detail" class="bowl-detail"></p>
+        </div>
+
+        <!-- ビジュアライゼーション -->
+        <div class="visual-area">
+            <p class="visual-label">実際の粒数イメージ（最大50粒表示）</p>
+            <div id="visual-container"></div>
+        </div>
+
+        <button onclick="calculateRice()" class="calc-btn">
+            再計算する
+        </button>
+
+        <p class="note-text">
+            ※ 10aあたり540kgの収穫、精米歩留90%、炊飯倍率2.3倍、96dpiで試算<br>
+            ※ 1シーズン = 年1回の収穫を想定
+        </p>
+    </div>
+    </main>
+
+    <footer class="footer" id="common-footer"></footer>
+
+    <script src="common.js"></script>
+    <script>
+        // 定数定義
+        const BOWL_SERVING = 150; // お茶碗一杯のご飯 (g)
+
+        function calculateRice() {
+            // 1. 画面サイズの取得 (ピクセル)
+            const widthPx = window.innerWidth;
+            const heightPx = window.innerHeight;
+
+            // 2. モバイル判定と補正係数の設定
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isMobile = /iphone|ipad|ipod|android|mobile/.test(userAgent);
+            const scaleFactor = isMobile ? 0.64 : 0.75;
+
+            // 3. 物理サイズへの変換（実測データに基づく補正係数を適用）
+            const dpi = 96;
+            const widthCm = (widthPx / dpi) * 2.54 * scaleFactor;
+            const heightCm = (heightPx / dpi) * 2.54 * scaleFactor;
+
+            // 面積 (平方メートル)
+            const areaM2 = (widthCm * heightCm) / 10000;
+
+            // 4. お米の収穫量計算
+            // 10a (1000m²) あたり玄米540kg = 1m²あたり540g
+            // 玄米 -> 白米(0.9) -> ご飯(2.3)
+            const cookedRicePerM2 = 540 * 0.9 * 2.3; // g/m²
+
+            // この画面での収穫量 (g)
+            const totalCookedRice = areaM2 * cookedRicePerM2;
+
+            // 米粒の数 (ご飯1gあたり約22粒と仮定)
+            const grainsCount = Math.floor(totalCookedRice * 22);
+
+            // 5. お茶碗判定の計算
+            const achievementRate = (totalCookedRice / BOWL_SERVING) * 100;
+            const bowlCount = totalCookedRice / BOWL_SERVING;
+
+            // 6. 結果の表示更新
+            document.getElementById('screen-size').innerText =
+                `${widthCm.toFixed(1)} cm × ${heightCm.toFixed(1)} cm（※実寸補正済み）`;
+
+            document.getElementById('rice-amount').innerText =
+                totalCookedRice.toFixed(2);
+
+            document.getElementById('detail-info').innerText =
+                `米粒換算: 約 ${grainsCount.toLocaleString()} 粒`;
+
+            // 7. お茶碗判定の表示（分岐処理）
+            const bowlStatusEl = document.getElementById('bowl-status');
+            const bowlMessageEl = document.getElementById('bowl-message');
+            const bowlDetailEl = document.getElementById('bowl-detail');
+
+            if (totalCookedRice < BOWL_SERVING) {
+                // ケース1: 150g未満（不足）
+                const devicesNeeded = Math.ceil(BOWL_SERVING / totalCookedRice);
+                const additionalDevices = devicesNeeded - 1; // 現在の1台を除く
+
+                bowlStatusEl.className = 'bowl-status shortage';
+                bowlMessageEl.innerHTML = 'お茶碗一杯には足りません！';
+                bowlDetailEl.innerHTML = `一杯分にするには、この端末があと<span class="emphasis">${additionalDevices}</span>台必要です`;
+            } else {
+                // ケース2: 150g以上（充足）
+                const bowlsServed = Math.floor(bowlCount);
+
+                bowlStatusEl.className = 'bowl-status sufficient';
+                bowlMessageEl.innerHTML = 'すごい！この画面サイズなら自給自足可能です';
+                bowlDetailEl.innerHTML = `お茶碗 約<span class="emphasis">${bowlsServed}</span>杯分になります`;
+            }
+
+            // 8. ビジュアライゼーション（米粒表示）
+            const container = document.getElementById('visual-container');
+            container.innerHTML = '';
+
+            const visualLimit = Math.min(grainsCount, 50);
+
+            for(let i=0; i<visualLimit; i++) {
+                const grain = document.createElement('div');
+                grain.className = 'grain';
+                // ランダム回転
+                grain.style.transform = `rotate(${Math.random() * 360}deg)`;
+                container.appendChild(grain);
+            }
+
+            if(grainsCount > 50) {
+                const more = document.createElement('span');
+                more.style.fontSize = '0.75rem';
+                more.style.color = '#888';
+                more.style.alignSelf = 'center';
+                more.style.marginLeft = '8px';
+                more.innerText = `...他 ${(grainsCount - 50).toLocaleString()} 粒`;
+                container.appendChild(more);
+            }
+        }
+
+        window.addEventListener('load', calculateRice);
+        window.addEventListener('resize', calculateRice);
+    </script>
+</body>
+</html>

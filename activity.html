@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動日誌 | NSK_AIZU</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="NSK_AIZUの活動日誌。学生たちの日々の取り組みを記録しています。農地再生、チーム活動、イベントの様子をお届けします。">
+    <meta name="keywords" content="NSK_AIZU, 活動日誌, 会津, NPO, 農業再生, 学生活動">
+    <link rel="canonical" href="https://npo-nsk-aizu.org/activity" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="活動日誌 | NSK_AIZU">
+    <meta property="og:description" content="学生たちの日々の取り組みを記録。農地再生、チーム活動、イベントの様子をお届けします。">
+    <meta property="og:image" content="https://npo-nsk-aizu.org/images/ogp.jpg">
+    <meta property="og:url" content="https://npo-nsk-aizu.org/activity">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="NPO NSK_AIZU">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@NSK_AIZU">
+    <meta name="twitter:title" content="活動日誌 | NSK_AIZU">
+    <meta name="twitter:description" content="学生たちの日々の取り組みを記録。農地再生、チーム活動、イベントの様子をお届けします。">
+    <meta name="twitter:image" content="https://npo-nsk-aizu.org/images/ogp.jpg">
+
+    <!-- Alternate Language -->
+    <link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/activity">
+    <link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/en/activity">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="subpage">
+
+  <header class="header" id="common-header"></header>
+    <main class="activity-main" id="main-content" role="main">
+
+        <section class="activity-hero">
+            <h1 class="activity-hero__title">- ACTIVITY DIARY -</h1>
+            <p class="activity-hero__subtitle">学生たちの日々の記録</p>
+        </section>
+
+        <div class="activity-container">
+
+            <div class="activity-filters">
+                <button class="filter-btn is-active" data-filter="all">すべて</button>
+                <button class="filter-btn" data-filter="field">田畑</button>
+                <button class="filter-btn" data-filter="team">チーム</button>
+                <button class="filter-btn" data-filter="event">イベント</button>
+            </div>
+
+            <div class="activity-grid" id="js-activity-grid">
+                <!-- microCMSに「activity」エンドポイントを作成後、ここにカードが動的生成されます -->
+                <div class="activity-empty">
+                    <p style="font-size: 18px; margin-bottom: 15px;">まもなく公開</p>
+                    <p>活動日誌の準備中です。<br>学生たちの日々の取り組みを、写真と短い文章でお届けします。</p>
+                </div>
+            </div>
+
+            <div class="about-btn-area" style="margin-top: 60px;">
+                <a href="/" class="btn-back-top">
+                    TOPに戻る
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer" id="common-footer"></footer>
+    <script src="common.js"></script>
+    <script src="activity.js"></script>
+</body>
+</html>

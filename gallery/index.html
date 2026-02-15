@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GALLERY | NSK_AIZU</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="NSK_AIZUのギャラリー。代表の祖母が遺した日本画作品と、私たちの活動の記録。">
+    <meta name="keywords" content="NSK_AIZU, ギャラリー, 日本画, アート, 活動写真, 会津, 福島, 農業活動, 学生NPO">
+    <link rel="canonical" href="https://npo-nsk-aizu.org/gallery/" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="GALLERY | NSK_AIZU">
+    <meta property="og:description" content="代表の祖母が遺した日本画作品と、私たちの活動の記録。">
+    <meta property="og:image" content="https://npo-nsk-aizu.org/gallery/images/MitsukoPicture/IMG_20251231_0014.jpg">
+    <meta property="og:url" content="https://npo-nsk-aizu.org/gallery/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="NPO NSK_AIZU">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GALLERY | NSK_AIZU">
+    <meta name="twitter:description" content="代表の祖母が遺した日本画作品と、私たちの活動の記録。">
+    <meta name="twitter:image" content="https://npo-nsk-aizu.org/gallery/images/MitsukoPicture/IMG_20251231_0014.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+
+    <link rel="stylesheet" href="../style.css?v=4">
+    <link rel="stylesheet" href="gallery.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="subpage">
+
+  <header class="header" id="common-header"></header>
+    <main class="gallery-main" id="main-content" role="main">
+
+        <!-- Hero -->
+        <section class="sub-hero">
+            <div class="sub-hero__inner">
+                <span class="sub-hero__en">GALLERY</span>
+                <h1 class="sub-hero__title">ギャラリー</h1>
+                <p class="sub-hero__lead">描くこと、つくること、残すこと。</p>
+            </div>
+        </section>
+
+        <!-- 活動の記録 セクション -->
+        <section class="gallery-section gallery-section--activity">
+            <div class="gallery-section__inner">
+                <span class="gallery-label">ACTIVITY</span>
+                <h2 class="gallery-section__heading">活動の記録</h2>
+                <p class="gallery-section__lead">
+                    畑で汗を流す日々。<br>
+                    まだまだこれからだけど、<br>
+                    少しずつ、確かに、前に進んでいます。
+                </p>
+
+                <div class="gallery-grid gallery-grid--activity" id="activity-grid">
+                    <!-- activity photos loaded by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 祖母の絵 セクション -->
+        <section class="gallery-section gallery-section--art">
+            <div class="gallery-section__inner">
+                <span class="gallery-label">GRANDMOTHER'S ART</span>
+                <h2 class="gallery-section__heading">祖母が遺してくれた絵</h2>
+                <p class="gallery-section__lead">
+                    代表の祖母・みつこさんが描いた日本画。<br>
+                    花、風景、小さな生き物たち。<br>
+                    筆のひとつひとつに、静かな愛情が宿っています。
+                </p>
+
+                <div class="gallery-grid" id="gallery-grid">
+                    <p class="gallery-loading">読み込み中...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="gallery-cta">
+            <div class="gallery-cta__inner">
+                <p class="gallery-cta__text">私たちの活動に興味を持ってくださった方へ</p>
+                <a href="/support.html" class="gallery-cta__link">応援の方法を見る →</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品詳細" style="display:none;">
+        <button class="lightbox__close" id="lightbox-close" aria-label="閉じる">&times;</button>
+        <div class="lightbox__content">
+            <div class="lightbox__image-wrap">
+                <img class="lightbox__image" id="lightbox-image" src="" alt="">
+            </div>
+            <div class="lightbox__info">
+                <p class="lightbox__type" id="lightbox-type"></p>
+                <h3 class="lightbox__title" id="lightbox-title"></h3>
+                <p class="lightbox__description" id="lightbox-description"></p>
+            </div>
+        </div>
+        <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="前の作品">&#8249;</button>
+        <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="次の作品">&#8250;</button>
+    </div>
+
+    <footer class="footer" id="common-footer"></footer>
+    <script src="../common.js"></script>
+    <script src="gallery.js?v=4"></script>
+</body>
+</html>

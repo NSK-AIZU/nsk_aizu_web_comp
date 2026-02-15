@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GALLERY | NSK_AIZU</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="NSK_AIZU Gallery. Japanese paintings left by our founder's grandmother, and photos from our activities.">
+    <meta name="keywords" content="NSK_AIZU, gallery, Japanese painting, art, activity photos, Aizu">
+    <link rel="canonical" href="https://npo-nsk-aizu.org/gallery/en/" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="GALLERY | NSK_AIZU">
+    <meta property="og:description" content="Japanese paintings left by our founder's grandmother, and photos from our activities.">
+    <meta property="og:image" content="https://npo-nsk-aizu.org/gallery/images/MitsukoPicture/IMG_20251231_0014.jpg">
+    <meta property="og:url" content="https://npo-nsk-aizu.org/gallery/en/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="NPO NSK_AIZU">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GALLERY | NSK_AIZU">
+    <meta name="twitter:description" content="Japanese paintings left by our founder's grandmother, and photos from our activities.">
+    <meta name="twitter:image" content="https://npo-nsk-aizu.org/gallery/images/MitsukoPicture/IMG_20251231_0014.jpg">
+
+    <!-- Alternate Language -->
+    <link rel="alternate" hreflang="ja" href="https://npo-nsk-aizu.org/gallery/">
+    <link rel="alternate" hreflang="en" href="https://npo-nsk-aizu.org/gallery/en/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+
+    <link rel="stylesheet" href="../../style.css?v=4">
+    <link rel="stylesheet" href="../gallery.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="subpage">
+
+  <header class="header" id="common-header"></header>
+    <main class="gallery-main" id="main-content" role="main">
+
+        <!-- Hero -->
+        <section class="sub-hero">
+            <div class="sub-hero__inner">
+                <span class="sub-hero__en">GALLERY</span>
+                <h1 class="sub-hero__title">Gallery</h1>
+                <p class="sub-hero__lead">To paint, to create, to preserve.</p>
+            </div>
+        </section>
+
+        <!-- Activity Section -->
+        <section class="gallery-section gallery-section--activity">
+            <div class="gallery-section__inner">
+                <span class="gallery-label">ACTIVITY</span>
+                <h2 class="gallery-section__heading">Our Activities</h2>
+                <p class="gallery-section__lead">
+                    Days spent sweating in the fields.<br>
+                    We still have a long way to go,<br>
+                    but step by step, we're moving forward.
+                </p>
+
+                <div class="gallery-grid gallery-grid--activity" id="activity-grid">
+                    <!-- activity photos loaded by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Grandmother's Art Section -->
+        <section class="gallery-section gallery-section--art">
+            <div class="gallery-section__inner">
+                <span class="gallery-label">GRANDMOTHER'S ART</span>
+                <h2 class="gallery-section__heading">Paintings Our Grandmother Left Us</h2>
+                <p class="gallery-section__lead">
+                    Japanese paintings by Mitsuko, our founder's grandmother.<br>
+                    Flowers, landscapes, small creatures.<br>
+                    Each brushstroke holds a quiet love.
+                </p>
+
+                <div class="gallery-grid" id="gallery-grid">
+                    <p class="gallery-loading">Loading...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="gallery-cta">
+            <div class="gallery-cta__inner">
+                <p class="gallery-cta__text">Interested in what we do?</p>
+                <a href="/en/support.html" class="gallery-cta__link">See how to support us →</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Artwork detail" style="display:none;">
+        <button class="lightbox__close" id="lightbox-close" aria-label="Close">&times;</button>
+        <div class="lightbox__content">
+            <div class="lightbox__image-wrap">
+                <img class="lightbox__image" id="lightbox-image" src="" alt="">
+            </div>
+            <div class="lightbox__info">
+                <p class="lightbox__type" id="lightbox-type"></p>
+                <h3 class="lightbox__title" id="lightbox-title"></h3>
+                <p class="lightbox__description" id="lightbox-description"></p>
+            </div>
+        </div>
+        <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" aria-label="Previous">&#8249;</button>
+        <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" aria-label="Next">&#8250;</button>
+    </div>
+
+    <footer class="footer" id="common-footer"></footer>
+    <script src="../../common.js"></script>
+    <script src="../gallery.js?v=4"></script>
+</body>
+</html>

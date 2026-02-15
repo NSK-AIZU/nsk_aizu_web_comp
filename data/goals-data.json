@@ -1,0 +1,6 @@
+[
+  { "label": "自分たちの畑を持つ", "target": "15a", "current": 0, "max": 15, "unit": "a", "note": "2026年度に15a確保予定" },
+  { "label": "お手伝いした面積", "target": "30a", "current": 10, "max": 30, "unit": "a", "note": "現在10a達成" },
+  { "label": "連携農家さん", "target": "5軒", "current": 2, "max": 5, "unit": "軒", "note": "少しずつ広がっています" },
+  { "label": "メンバー", "target": "50人", "current": 16, "max": 50, "unit": "人", "note": "仲間募集中" }
+]

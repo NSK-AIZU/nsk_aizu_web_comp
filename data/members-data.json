@@ -1,0 +1,16 @@
+[
+  { "name": "多田 旭志", "role": "理事長", "desc": "創設メンバー。言い出しっぺで、走り続ける人。", "photo": "/images/members/01.jpg" },
+  { "name": "小林 佑輔", "role": "副理事長", "desc": "創設メンバー。頼れる右腕。", "photo": "/images/members/02.jpg" },
+  { "name": "小林 幸生", "role": "監事", "desc": "創設メンバー。裏からしっかり支えてくれる番人。", "photo": "/images/members/03.jpg" },
+  { "name": "ammannu", "role": "副理事長", "desc": "現役保育士。温かさと強さを兼ね備えた存在。", "photo": "/images/members/04.svg" },
+  { "name": "Hameed Saji", "role": "アドバイザー", "desc": "我らが師匠。この方がいなかったら、この団体はなかった。", "photo": "/images/members/05.jpg" },
+  { "name": "こしあんさん", "role": "相談役", "desc": "創設メンバーの頼れる先輩であり、相談相手。", "photo": "/images/members/06.svg" },
+  { "name": "千歳", "role": "渉外担当？", "desc": "狙わず笑いが取れる天性の持ち主。ずるい。", "photo": "/images/members/07.svg" },
+  { "name": "カズくん", "role": "企画担当？", "desc": "「面白い」をいつも引き連れてくる。", "photo": "/images/members/08.jpg" },
+  { "name": "ひろかわ", "role": "フィールド担当？", "desc": "末っ子。考えるより先に手が動く、良いやつ。", "photo": "/images/members/09.jpg" },
+  { "name": "じゅんじ", "role": "ムードメーカー？", "desc": "みんなが誇る、愛され担当。", "photo": "/images/members/10.jpg" },
+  { "name": "そうへい", "role": "現場担当？", "desc": "まだ話せてないけど、吉野家で会えたから食の趣味は合いそう。", "photo": "/images/members/11.svg" },
+  { "name": "さきさん", "role": "サポート担当？", "desc": "真面目で優しい。まだまだ未知数なのも魅力。", "photo": "/images/members/12.svg" },
+  { "name": "じゅんた", "role": "広報担当？", "desc": "生き方もカッコいい、我らのカッコいい担当。", "photo": "/images/members/13.jpg" },
+  { "name": "なお良い", "role": "実働担当？", "desc": "手がよく動く。マインドも最高。", "photo": "/images/members/14.svg" }
+]
