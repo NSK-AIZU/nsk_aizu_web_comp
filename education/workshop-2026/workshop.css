@@ -1,0 +1,892 @@
+/* =========================================
+   Workshop 2026 - NPO NSK_AIZU Style
+   教育セクションのデザインを継承
+   ========================================= */
+
+/* ベースリセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* カラーパレット（education.css準拠） */
+:root {
+    --bg-page: #fafbfa;
+    --bg-content: #ffffff;
+    --bg-card: #f5f7f5;
+    --bg-highlight: #eef2ee;
+    --bg-hero: #1a2520;
+
+    --text-primary: #1a2520;
+    --text-secondary: #4a5550;
+    --text-muted: #7a8580;
+    --text-light: #ffffff;
+
+    --accent-green: #3d7a50;
+    --accent-green-light: #5a9a6a;
+    --accent-amber: #b8860b;
+    --accent-teal: #2d6a6a;
+    --accent-purple: #6a4c93;
+    --accent-coral: #c4616c;
+
+    --border-subtle: rgba(26, 37, 32, 0.08);
+    --border-light: rgba(26, 37, 32, 0.15);
+    --border-medium: rgba(26, 37, 32, 0.25);
+}
+
+body {
+    background-color: var(--bg-page);
+    font-family: "Zen Old Mincho", serif;
+    color: var(--text-primary);
+    line-height: 1.8;
+}
+
+a {
+    color: var(--accent-green);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.3s, opacity 0.3s;
+}
+
+a:hover {
+    color: var(--accent-teal);
+    opacity: 0.9;
+}
+
+/* -------------------------
+   Hero Section
+------------------------- */
+.ws-hero {
+    width: 100%;
+    padding: 140px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, #0d1210 0%, var(--bg-hero) 100%);
+}
+
+.ws-hero__title {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.ws-hero__subtitle {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+}
+
+.ws-hero__date {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.15em;
+}
+
+/* -------------------------
+   Breadcrumb
+------------------------- */
+.breadcrumb {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb a:hover {
+    color: var(--accent-green);
+}
+
+/* -------------------------
+   Main Container
+------------------------- */
+.ws-container {
+    max-width: 900px;
+    margin: -40px auto 100px;
+    padding: 50px 50px 60px;
+    background-color: var(--bg-content);
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 10;
+}
+
+/* -------------------------
+   Section Styles
+------------------------- */
+.ws-section {
+    margin-bottom: 80px;
+}
+
+.ws-section__title {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.ws-section__text {
+    font-size: 15px;
+    line-height: 2;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* -------------------------
+   Group Navigation (目次)
+------------------------- */
+.ws-group-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 80px;
+}
+
+.ws-group-nav__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 10px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s;
+    background-color: var(--bg-content);
+}
+
+.ws-group-nav__item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+}
+
+.ws-group-nav__item--video:hover {
+    border-color: var(--accent-teal);
+    color: var(--accent-teal);
+}
+
+.ws-group-nav__item--music:hover {
+    border-color: var(--accent-purple);
+    color: var(--accent-purple);
+}
+
+.ws-group-nav__item--image:hover {
+    border-color: var(--accent-coral);
+    color: var(--accent-coral);
+}
+
+.ws-group-nav__icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.ws-group-nav__label {
+    font-size: 13px;
+    font-family: "Zen Old Mincho", serif;
+    letter-spacing: 0.05em;
+}
+
+/* -------------------------
+   Group Header
+------------------------- */
+.ws-group-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.ws-group-header__badge {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    padding: 5px 14px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: var(--accent-teal);
+    white-space: nowrap;
+}
+
+.ws-group-header--video .ws-group-header__badge {
+    background-color: var(--accent-teal);
+}
+
+.ws-group-header--music .ws-group-header__badge {
+    background-color: var(--accent-purple);
+}
+
+.ws-group-header--image .ws-group-header__badge {
+    background-color: var(--accent-coral);
+}
+
+.ws-group-header__title {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* -------------------------
+   Video Embed (16:9 Responsive)
+------------------------- */
+.ws-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #000;
+    margin-bottom: 25px;
+}
+
+.ws-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* YouTube Shorts (9:16 vertical) */
+.ws-video-wrapper--shorts {
+    padding-bottom: 0;
+    height: auto;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    aspect-ratio: 9 / 16;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ws-video-wrapper--shorts iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* -------------------------
+   Audio Player
+------------------------- */
+.ws-audio-player {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.ws-audio-player__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.ws-audio-player__icon {
+    font-size: 22px;
+    color: var(--accent-purple);
+}
+
+.ws-audio-player__track-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.ws-audio-player__element {
+    width: 100%;
+    height: 44px;
+    border-radius: 8px;
+}
+
+/* Chromeの場合のaudioスタイル調整 */
+audio::-webkit-media-controls-panel {
+    background-color: var(--bg-highlight);
+}
+
+/* -------------------------
+   Image Gallery
+------------------------- */
+.ws-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.ws-gallery__item {
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--bg-card);
+}
+
+.ws-gallery__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.ws-gallery__caption {
+    padding: 15px 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+/* 画像が2つ以上ある場合のグリッド */
+.ws-gallery--grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* -------------------------
+   Work Info Box
+------------------------- */
+.ws-work-info {
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--accent-green);
+    border-radius: 0 8px 8px 0;
+    padding: 25px 30px;
+    background-color: var(--bg-card);
+}
+
+.ws-work-info__title {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 15px;
+}
+
+.ws-work-info__text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 6px;
+}
+
+.ws-work-info__text:last-child {
+    margin-bottom: 0;
+}
+
+.ws-work-info__text strong {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* -------------------------
+   Note Box (education.css互換)
+------------------------- */
+.note-box {
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--accent-teal);
+    border-radius: 8px;
+    padding: 25px 30px;
+    background-color: var(--bg-card);
+    margin-top: 40px;
+}
+
+.note-box__title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: var(--accent-teal);
+    letter-spacing: 0.1em;
+    margin-bottom: 15px;
+}
+
+.note-box__text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.note-box__text a {
+    color: var(--accent-green);
+}
+
+/* -------------------------
+   Group Cards (Top Page)
+------------------------- */
+.ws-group-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.ws-group-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 25px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s;
+    background-color: var(--bg-content);
+}
+
+.ws-group-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+}
+
+.ws-group-card--video:hover { border-color: var(--accent-teal); }
+.ws-group-card--music:hover { border-color: var(--accent-purple); }
+.ws-group-card--image:hover { border-color: var(--accent-coral); }
+
+.ws-group-card__icon {
+    font-size: 28px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--text-muted);
+}
+
+.ws-group-card--video:hover .ws-group-card__icon { color: var(--accent-teal); }
+.ws-group-card--music:hover .ws-group-card__icon { color: var(--accent-purple); }
+.ws-group-card--image:hover .ws-group-card__icon { color: var(--accent-coral); }
+
+.ws-group-card__body {
+    flex: 1;
+}
+
+.ws-group-card__badge {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 6px;
+}
+
+.ws-group-card__title {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.ws-group-card__desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.ws-group-card__status {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+}
+
+.ws-group-card__status--soon {
+    background-color: var(--bg-highlight);
+    color: var(--text-muted);
+    border: 1px solid var(--border-light);
+}
+
+/* -------------------------
+   Coming Soon
+------------------------- */
+.ws-coming-soon {
+    text-align: center;
+    padding: 80px 30px;
+    border: 2px dashed var(--border-light);
+    border-radius: 12px;
+    background-color: var(--bg-card);
+}
+
+.ws-coming-soon__icon {
+    font-size: 48px;
+    color: var(--text-muted);
+    opacity: 0.4;
+    margin-bottom: 20px;
+}
+
+.ws-coming-soon__title {
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.ws-coming-soon__text {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+/* -------------------------
+   Track List (Music Page)
+------------------------- */
+.ws-track {
+    display: flex;
+    gap: 20px;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.ws-track__number {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-purple);
+    opacity: 0.5;
+    flex-shrink: 0;
+    width: 50px;
+    text-align: center;
+    padding-top: 4px;
+}
+
+.ws-track__content {
+    flex: 1;
+}
+
+.ws-track__title {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.ws-track__artist {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.ws-track__info {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.ws-track__info strong {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.ws-track .ws-audio-player {
+    margin-bottom: 0;
+    border: none;
+    padding: 0;
+    background: none;
+}
+
+/* -------------------------
+   Evolution Timeline (Image Page)
+------------------------- */
+.ws-evolution-step {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.ws-evolution-step__marker {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 44px;
+}
+
+.ws-evolution-step__number {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--border-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-muted);
+    background-color: var(--bg-content);
+    position: relative;
+    z-index: 2;
+}
+
+.ws-evolution-step__number--final {
+    background-color: var(--accent-coral);
+    color: #fff;
+    border-color: var(--accent-coral);
+}
+
+.ws-evolution-step__line {
+    width: 2px;
+    flex: 1;
+    background-color: var(--border-light);
+    margin-top: 8px;
+}
+
+.ws-evolution-step__body {
+    flex: 1;
+    padding-bottom: 10px;
+}
+
+.ws-evolution-step__title {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.ws-evolution-step__image {
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+}
+
+.ws-evolution-step__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.ws-evolution-step__image--final {
+    border: 2px solid var(--accent-coral);
+    box-shadow: 0 4px 20px rgba(196, 97, 108, 0.15);
+}
+
+.ws-evolution-step__comment {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-style: italic;
+}
+
+/* Prompt Box */
+.ws-prompt-box {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--accent-purple);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+}
+
+.ws-prompt-box--final {
+    border-left-color: var(--accent-coral);
+    background-color: rgba(196, 97, 108, 0.04);
+}
+
+.ws-prompt-box__label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.ws-prompt-box__text {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-family: monospace, "Zen Old Mincho", serif;
+}
+
+/* -------------------------
+   Buttons
+------------------------- */
+.btn-back {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    padding: 15px 0;
+    border: 1px solid var(--border-medium);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-family: "Zen Old Mincho", serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    background-color: var(--bg-content);
+    border-radius: 4px;
+}
+
+.btn-back:hover {
+    background-color: var(--accent-green);
+    color: #fff;
+    border-color: var(--accent-green);
+    opacity: 1;
+}
+
+.btn-area {
+    text-align: center;
+    margin-top: 60px;
+}
+
+/* -------------------------
+   Footer
+------------------------- */
+.ws-footer {
+    background-color: var(--bg-hero);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+}
+
+.ws-footer a {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 15px;
+}
+
+.ws-footer a:hover {
+    color: #fff;
+}
+
+.ws-footer__copyright {
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.ws-footer__links {
+    margin-top: 10px;
+}
+
+/* -------------------------
+   Responsive
+------------------------- */
+@media (max-width: 768px) {
+    .ws-hero {
+        padding: 120px 20px 40px;
+    }
+
+    .ws-hero__title {
+        font-size: 26px;
+    }
+
+    .ws-container {
+        padding: 30px 20px 50px;
+        margin: -20px 10px 60px;
+        border-radius: 8px;
+    }
+
+    .ws-group-nav {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ws-group-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .ws-group-card {
+        padding: 20px;
+    }
+
+    .ws-group-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .ws-audio-player {
+        padding: 20px;
+    }
+
+    .ws-gallery--grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ws-work-info {
+        padding: 20px;
+    }
+
+    .note-box {
+        padding: 20px;
+    }
+
+    .btn-back {
+        width: 100%;
+    }
+
+    .ws-track {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .ws-track__number {
+        width: auto;
+        text-align: left;
+    }
+
+    .ws-evolution-step {
+        gap: 16px;
+    }
+
+    .ws-evolution-step__marker {
+        width: 36px;
+    }
+
+    .ws-evolution-step__number {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .ws-coming-soon {
+        padding: 50px 20px;
+    }
+
+    .ws-prompt-box {
+        padding: 14px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ws-group-nav {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .ws-group-nav__item {
+        padding: 15px 8px;
+    }
+}
