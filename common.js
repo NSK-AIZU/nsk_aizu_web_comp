@@ -657,6 +657,52 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================
+// BGM トグルプレイヤー（ホームページ専用）
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const bgm = document.getElementById('js-bgm');
+    const toggleBtn = document.getElementById('js-bgm-toggle');
+    if (!bgm || !toggleBtn) return;
+
+    const iconOff = toggleBtn.querySelector('.bgm-toggle__icon--off');
+    const iconOn = toggleBtn.querySelector('.bgm-toggle__icon--on');
+
+    // 音量をやや控えめに
+    bgm.volume = 0.3;
+
+    function updateUI(playing) {
+        if (playing) {
+            toggleBtn.classList.add('is-playing');
+            toggleBtn.setAttribute('aria-label', 'BGMを停止する');
+            iconOff.style.display = 'none';
+            iconOn.style.display = '';
+        } else {
+            toggleBtn.classList.remove('is-playing');
+            toggleBtn.setAttribute('aria-label', 'BGMを再生する');
+            iconOff.style.display = '';
+            iconOn.style.display = 'none';
+        }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        if (bgm.paused) {
+            bgm.play().then(() => updateUI(true)).catch(() => {});
+        } else {
+            bgm.pause();
+            updateUI(false);
+        }
+    });
+
+    // タブ非表示時は一時停止
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && !bgm.paused) {
+            bgm.pause();
+            updateUI(false);
+        }
+    });
+});
+
+// ==========================================
 // メンバー モーダル
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {

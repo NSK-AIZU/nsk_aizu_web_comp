@@ -3648,3 +3648,72 @@ a.support-card--link *  {
         align-items: center;
     }
 }
+
+/* -------------------------
+   BGM Toggle Button
+------------------------- */
+.bgm-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 900;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: rgba(250, 248, 244, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-base), color var(--transition-base), box-shadow var(--transition-base);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.bgm-toggle:hover {
+    background: rgba(250, 248, 244, 0.95);
+    color: var(--color-gold);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.bgm-toggle.is-playing {
+    background: var(--color-gold);
+    color: #fff;
+    border-color: var(--color-gold);
+}
+
+.bgm-toggle.is-playing:hover {
+    background: var(--color-gold-light);
+    color: #fff;
+}
+
+.bgm-toggle__icon {
+    width: 22px;
+    height: 22px;
+}
+
+/* Pulse animation when playing */
+@keyframes bgm-pulse {
+    0%, 100% { box-shadow: 0 2px 8px rgba(160, 132, 92, 0.3); }
+    50% { box-shadow: 0 2px 16px rgba(160, 132, 92, 0.5); }
+}
+
+.bgm-toggle.is-playing {
+    animation: bgm-pulse 2s ease-in-out infinite;
+}
+
+@media (max-width: 480px) {
+    .bgm-toggle {
+        bottom: 16px;
+        right: 16px;
+        width: 42px;
+        height: 42px;
+    }
+    .bgm-toggle__icon {
+        width: 18px;
+        height: 18px;
+    }
+}
