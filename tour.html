@@ -562,7 +562,7 @@
             </div>
             <div class="lp-info-strip__item">
                 <div class="lp-info-strip__label">集合場所</div>
-                <div class="lp-info-strip__value">会津大学敷地内バス停</div>
+                <div class="lp-info-strip__value"><a href="#" onclick="openMap(event)" style="color: inherit; text-decoration: underline; text-decoration-style: dotted; display: inline-flex; align-items: center; gap: 4px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--teal);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>会津大学敷地内バス停</a></div>
             </div>
             <div class="lp-info-strip__item">
                 <div class="lp-info-strip__label">参加費</div>
@@ -701,7 +701,7 @@
     <!-- Footer (common.js で挿入) -->
     <footer class="footer" id="common-footer"></footer>
 
-    <!-- Video Modal -->
+    <!-- Video/Map Modal -->
     <div class="video-modal" id="videoModal" onclick="closeVideo(event)">
         <div class="video-modal__inner">
             <button class="video-modal__close" onclick="closeVideo(event)">&times;</button>
@@ -716,6 +716,15 @@
         var modal = document.getElementById('videoModal');
         var frame = document.getElementById('videoFrame');
         frame.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+    function openMap(e) {
+        e.preventDefault();
+        var modal = document.getElementById('videoModal');
+        var frame = document.getElementById('videoFrame');
+        // Aizu University Bus Stop Google Maps Embed URL
+        frame.src = 'https://maps.google.com/maps?q=37.521868,139.937312&hl=ja&z=17&output=embed'; 
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
     }
