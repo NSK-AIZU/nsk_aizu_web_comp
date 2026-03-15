@@ -58,9 +58,6 @@ function renderMembersHeader() {
                 ${appName ? `<span class="m-header__app-name">${appName}</span>` : ''}
             </a>
             <div class="m-header__actions">
-                ${isMeishi ? `<a href="/members/meishi/new.html" class="m-header__add" aria-label="新規登録">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                </a>` : ''}
                 <div class="m-header__user" id="js-user-menu">
                     <button type="button" class="m-header__avatar" id="js-avatar-btn">${initial}</button>
                     <div class="m-header__dropdown" id="js-dropdown">

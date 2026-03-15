@@ -4326,6 +4326,24 @@ a.m-header__dropdown-item {
     margin-bottom: 16px;
 }
 
+a.m-toolbar__add,
+.m-toolbar__add {
+    flex-shrink: 0;
+    padding: 8px 20px;
+    background: var(--color-dark);
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+}
+
+.m-toolbar__add:hover {
+    opacity: 0.85;
+}
+
 .m-toolbar__count {
     font-size: 13px;
     color: #999;

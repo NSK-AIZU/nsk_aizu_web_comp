@@ -164,14 +164,19 @@
 
         ocrBtn.disabled = true;
         ocrBtn.innerHTML = '<span class="m-ocr__spinner"></span> 読み取り中...';
-        ocrStatus.textContent = 'Google Cloud Vision で読み取り中...';
+        ocrStatus.textContent = cardImageBack
+            ? 'Google Cloud Vision で表裏を読み取り中...'
+            : 'Google Cloud Vision で読み取り中...';
         ocrStatus.className = 'm-ocr__status';
 
         try {
+            const ocrBody = { imageUrl: cardImageFront };
+            if (cardImageBack) ocrBody.imageUrlBack = cardImageBack;
+
             const response = await fetch('/api/ocr', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ imageUrl: cardImageFront }),
+                body: JSON.stringify(ocrBody),
             });
 
             const data = await response.json();

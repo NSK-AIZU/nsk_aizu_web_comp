@@ -5,8 +5,8 @@
  * APIキーはCloudflare環境変数 GOOGLE_CLOUD_VISION_API_KEY に設定すること。
  *
  * エンドポイント: POST /api/ocr
- * リクエスト: { "imageUrl": "https://..." }
- * レスポンス: { "text": "...", "parsed": { ... } }
+ * リクエスト: { "imageUrl": "https://...", "imageUrlBack": "https://..." (任意) }
+ * レスポンス: { "text": "...", "textBack": "...", "parsed": { ... } }
  */
 
 // ==========================================
@@ -123,7 +123,7 @@ export async function onRequestPost(context) {
     }
 
     try {
-        const { imageUrl } = await request.json();
+        const { imageUrl, imageUrlBack } = await request.json();
 
         if (!imageUrl) {
             return jsonResponse({ error: '画像URLが必要です' }, 400);
@@ -134,24 +134,43 @@ export async function onRequestPost(context) {
             return jsonResponse({ error: 'Google Cloud Vision APIキーが設定されていません' }, 500);
         }
 
-        // 画像をBase64に変換
-        const imageResponse = await fetch(imageUrl);
-        const imageBuffer = await imageResponse.arrayBuffer();
-        const base64Image = btoa(String.fromCharCode(...new Uint8Array(imageBuffer)));
+        // 画像URL → Base64 変換（チャンク処理でスタックオーバーフローを防止）
+        async function imageToBase64(url) {
+            const res = await fetch(url);
+            const buf = await res.arrayBuffer();
+            const bytes = new Uint8Array(buf);
+            let bin = '';
+            const chunkSize = 8192;
+            for (let i = 0; i < bytes.length; i += chunkSize) {
+                bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+            }
+            return btoa(bin);
+        }
 
-        // Google Cloud Vision API にリクエスト
+        // Vision API リクエストを構築（表面は必須、裏面はあれば追加）
+        const visionRequests = [
+            {
+                image: { content: await imageToBase64(imageUrl) },
+                features: [{ type: 'TEXT_DETECTION' }],
+                imageContext: { languageHints: ['ja', 'en'] },
+            },
+        ];
+
+        if (imageUrlBack) {
+            visionRequests.push({
+                image: { content: await imageToBase64(imageUrlBack) },
+                features: [{ type: 'TEXT_DETECTION' }],
+                imageContext: { languageHints: ['ja', 'en'] },
+            });
+        }
+
+        // Google Cloud Vision API に一括リクエスト
         const visionResponse = await fetch(
             `https://vision.googleapis.com/v1/images:annotate?key=${apiKey}`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    requests: [{
-                        image: { content: base64Image },
-                        features: [{ type: 'TEXT_DETECTION' }],
-                        imageContext: { languageHints: ['ja', 'en'] },
-                    }],
-                }),
+                body: JSON.stringify({ requests: visionRequests }),
             }
         );
 
@@ -161,15 +180,23 @@ export async function onRequestPost(context) {
             return jsonResponse({ error: `Vision API エラー: ${visionData.error.message}` }, 500);
         }
 
-        const annotations = visionData.responses?.[0]?.textAnnotations;
-        if (!annotations || annotations.length === 0) {
-            return jsonResponse({ text: '', parsed: {}, message: 'テキストが検出されませんでした' }, 200);
+        // 表面のテキスト
+        const frontAnnotations = visionData.responses?.[0]?.textAnnotations;
+        const textFront = frontAnnotations?.[0]?.description || '';
+
+        // 裏面のテキスト
+        const backAnnotations = visionData.responses?.[1]?.textAnnotations;
+        const textBack = backAnnotations?.[0]?.description || '';
+
+        if (!textFront && !textBack) {
+            return jsonResponse({ text: '', textBack: '', parsed: {}, message: 'テキストが検出されませんでした' }, 200);
         }
 
-        const fullText = annotations[0].description;
-        const parsed = parseBusinessCard(fullText);
+        // 表裏のテキストを結合してパース（重複情報は parseBusinessCard 内で先勝ち）
+        const combinedText = [textFront, textBack].filter(Boolean).join('\n');
+        const parsed = parseBusinessCard(combinedText);
 
-        return jsonResponse({ text: fullText, parsed }, 200);
+        return jsonResponse({ text: textFront, textBack, parsed }, 200);
     } catch (error) {
         return jsonResponse({ error: 'OCR処理中にエラーが発生しました: ' + error.message }, 500);
     }
