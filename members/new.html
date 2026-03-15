@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名刺を登録 | Who_Are_You? | NSK_AIZU</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/style.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body class="members-body">
+    <header class="m-header" id="members-header"></header>
+
+    <main class="m-main m-main--narrow" id="main-content">
+        <div id="js-loading" class="m-loading">
+            <div class="m-loading__spinner"></div>
+            <p>読み込み中...</p>
+        </div>
+
+        <div id="js-content" style="display:none;">
+            <h1 class="m-page-title">名刺を登録</h1>
+
+            <form id="js-card-form" class="m-form">
+                <div id="js-form-error" class="m-form__error" style="display:none;"></div>
+
+                <!-- 氏名 -->
+                <fieldset class="m-fieldset">
+                    <legend class="m-fieldset__legend">氏名（必須）</legend>
+                    <div class="m-form__row">
+                        <div class="m-form__col">
+                            <label class="m-form__label">姓</label>
+                            <input name="last_name" required class="m-form__input" placeholder="山田">
+                        </div>
+                        <div class="m-form__col">
+                            <label class="m-form__label">名</label>
+                            <input name="first_name" required class="m-form__input" placeholder="太郎">
+                        </div>
+                    </div>
+                    <div class="m-form__row">
+                        <div class="m-form__col">
+                            <label class="m-form__label">セイ（カナ）</label>
+                            <input name="last_name_kana" class="m-form__input" placeholder="ヤマダ">
+                        </div>
+                        <div class="m-form__col">
+                            <label class="m-form__label">メイ（カナ）</label>
+                            <input name="first_name_kana" class="m-form__input" placeholder="タロウ">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- 所属 -->
+                <fieldset class="m-fieldset">
+                    <legend class="m-fieldset__legend">所属</legend>
+                    <div class="m-form__group">
+                        <label class="m-form__label">会社名</label>
+                        <input name="company" class="m-form__input" placeholder="株式会社サンプル">
+                    </div>
+                    <div class="m-form__row">
+                        <div class="m-form__col">
+                            <label class="m-form__label">部署</label>
+                            <input name="department" class="m-form__input" placeholder="営業部">
+                        </div>
+                        <div class="m-form__col">
+                            <label class="m-form__label">役職</label>
+                            <input name="position" class="m-form__input" placeholder="部長">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- 連絡先 -->
+                <fieldset class="m-fieldset">
+                    <legend class="m-fieldset__legend">連絡先</legend>
+                    <div class="m-form__group">
+                        <label class="m-form__label">メールアドレス</label>
+                        <input name="email" type="email" class="m-form__input" placeholder="yamada@example.com">
+                    </div>
+                    <div class="m-form__row">
+                        <div class="m-form__col">
+                            <label class="m-form__label">電話</label>
+                            <input name="phone" class="m-form__input" placeholder="03-1234-5678">
+                        </div>
+                        <div class="m-form__col">
+                            <label class="m-form__label">携帯</label>
+                            <input name="mobile" class="m-form__input" placeholder="090-1234-5678">
+                        </div>
+                    </div>
+                    <div class="m-form__group">
+                        <label class="m-form__label">住所</label>
+                        <input name="address" class="m-form__input" placeholder="東京都千代田区...">
+                    </div>
+                    <div class="m-form__group">
+                        <label class="m-form__label">ウェブサイト</label>
+                        <input name="website" class="m-form__input" placeholder="https://example.com">
+                    </div>
+                </fieldset>
+
+                <!-- タグ -->
+                <fieldset class="m-fieldset">
+                    <legend class="m-fieldset__legend">タグ</legend>
+                    <div class="m-tag-input" id="js-tag-input-wrap">
+                        <div class="m-tag-input__selected" id="js-selected-tags"></div>
+                        <input type="text" id="js-tag-input" class="m-tag-input__field" placeholder="タグを追加...">
+                    </div>
+                    <div id="js-tag-suggestions" class="m-tag-suggestions" style="display:none;"></div>
+                    <div id="js-tag-color-picker" class="m-tag-color-picker" style="display:none;"></div>
+                    <p class="m-form__hint">タグ名を入力して追加。既存のタグから選択するか、新しいタグを作成できます。</p>
+                </fieldset>
+
+                <!-- メモ -->
+                <div class="m-form__group">
+                    <label class="m-form__label">メモ</label>
+                    <textarea name="memo" rows="3" class="m-form__input m-form__textarea" placeholder="イベントで知り合った、○○プロジェクトの担当者..."></textarea>
+                </div>
+
+                <!-- 名刺画像 -->
+                <fieldset class="m-fieldset">
+                    <legend class="m-fieldset__legend">名刺画像</legend>
+                    <div class="m-form__row">
+                        <div class="m-form__col">
+                            <label class="m-form__label">表面</label>
+                            <div class="m-img-upload" id="js-img-front">
+                                <div class="m-img-upload__dropzone" id="js-dropzone-front">
+                                    <svg class="m-img-upload__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                    <p>クリックして画像を選択</p>
+                                </div>
+                                <input type="file" accept="image/*" class="m-img-upload__file" id="js-file-front">
+                                <div class="m-img-upload__preview" id="js-preview-front" style="display:none;">
+                                    <img id="js-preview-img-front" alt="表面">
+                                    <button type="button" class="m-img-upload__remove" id="js-remove-front">&times;</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-form__col">
+                            <label class="m-form__label">裏面</label>
+                            <div class="m-img-upload" id="js-img-back">
+                                <div class="m-img-upload__dropzone" id="js-dropzone-back">
+                                    <svg class="m-img-upload__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                    <p>クリックして画像を選択</p>
+                                </div>
+                                <input type="file" accept="image/*" class="m-img-upload__file" id="js-file-back">
+                                <div class="m-img-upload__preview" id="js-preview-back" style="display:none;">
+                                    <img id="js-preview-img-back" alt="裏面">
+                                    <button type="button" class="m-img-upload__remove" id="js-remove-back">&times;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- OCR -->
+                    <div class="m-ocr" id="js-ocr-area" style="display:none;">
+                        <button type="button" id="js-ocr-btn" class="m-ocr__btn">
+                            <svg class="m-ocr__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            OCRで読み取り
+                        </button>
+                        <p class="m-ocr__hint">表面の画像から氏名・会社名・連絡先などを自動で読み取ります</p>
+                        <p id="js-ocr-status" class="m-ocr__status"></p>
+                    </div>
+                </fieldset>
+
+                <!-- ボタン -->
+                <div class="m-form__actions">
+                    <button type="submit" class="m-form__submit" id="js-submit-btn">登録する</button>
+                    <a href="/members/" class="m-form__cancel">キャンセル</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="members-common.js"></script>
+    <script src="card-form.js"></script>
+</body>
+</html>
