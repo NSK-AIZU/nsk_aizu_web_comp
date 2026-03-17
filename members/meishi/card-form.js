@@ -82,18 +82,12 @@
     // PDF→画像変換
     // ==========================================
     async function convertPdfToImage(file) {
-        // pdf.jsがロードされるまで待つ
-        let retries = 0;
-        while (!window.pdfjsLib && retries < 50) {
-            await new Promise(resolve => setTimeout(resolve, 100));
-            retries++;
-        }
-        if (!window.pdfjsLib) {
+        if (typeof pdfjsLib === 'undefined') {
             throw new Error('PDFライブラリの読み込みに失敗しました');
         }
 
         const arrayBuffer = await file.arrayBuffer();
-        const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
         const page = await pdf.getPage(1);
 
         // 高解像度でレンダリング（名刺のOCR精度向上のため）
