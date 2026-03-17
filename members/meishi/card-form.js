@@ -79,6 +79,43 @@
     renderSelectedTags();
 
     // ==========================================
+    // PDF→画像変換
+    // ==========================================
+    async function convertPdfToImage(file) {
+        // pdf.jsがロードされるまで待つ
+        let retries = 0;
+        while (!window.pdfjsLib && retries < 50) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+            retries++;
+        }
+        if (!window.pdfjsLib) {
+            throw new Error('PDFライブラリの読み込みに失敗しました');
+        }
+
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const page = await pdf.getPage(1);
+
+        // 高解像度でレンダリング（名刺のOCR精度向上のため）
+        const scale = 2;
+        const viewport = page.getViewport({ scale });
+
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        await page.render({ canvasContext: context, viewport }).promise;
+
+        // CanvasをBlobに変換
+        return new Promise((resolve) => {
+            canvas.toBlob((blob) => {
+                resolve(new File([blob], file.name.replace(/\.pdf$/i, '.png'), { type: 'image/png' }));
+            }, 'image/png');
+        });
+    }
+
+    // ==========================================
     // 画像アップロード
     // ==========================================
     function setupImageUpload(side) {
@@ -89,8 +126,21 @@
         dropzone.addEventListener('click', () => fileInput.click());
 
         fileInput.addEventListener('change', async (e) => {
-            const file = e.target.files[0];
+            let file = e.target.files[0];
             if (!file) return;
+
+            // PDFの場合は画像に変換
+            const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+            if (isPdf) {
+                dropzone.querySelector('p').textContent = 'PDFを変換中...';
+                try {
+                    file = await convertPdfToImage(file);
+                } catch (err) {
+                    alert('PDF変換エラー: ' + err.message);
+                    dropzone.querySelector('p').textContent = 'クリックして画像/PDFを選択';
+                    return;
+                }
+            }
 
             // プレビュー表示
             const reader = new FileReader();

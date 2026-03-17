@@ -11,6 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs" type="module"></script>
+    <script>
+        // pdf.jsのworkerを設定
+        window.pdfjsLib = null;
+        import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs').then(pdfjsLib => {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.mjs';
+            window.pdfjsLib = pdfjsLib;
+        });
+    </script>
 </head>
 <body class="members-body">
     <header class="m-header" id="members-header"></header>
@@ -128,9 +137,9 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
                                     </svg>
-                                    <p>クリックして画像を選択</p>
+                                    <p>クリックして画像/PDFを選択</p>
                                 </div>
-                                <input type="file" accept="image/*" class="m-img-upload__file" id="js-file-front">
+                                <input type="file" accept="image/*,.pdf,application/pdf" class="m-img-upload__file" id="js-file-front">
                                 <div class="m-img-upload__preview" id="js-preview-front" style="display:none;">
                                     <img id="js-preview-img-front" alt="表面">
                                     <button type="button" class="m-img-upload__remove" id="js-remove-front">&times;</button>
@@ -145,9 +154,9 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
                                     </svg>
-                                    <p>クリックして画像を選択</p>
+                                    <p>クリックして画像/PDFを選択</p>
                                 </div>
-                                <input type="file" accept="image/*" class="m-img-upload__file" id="js-file-back">
+                                <input type="file" accept="image/*,.pdf,application/pdf" class="m-img-upload__file" id="js-file-back">
                                 <div class="m-img-upload__preview" id="js-preview-back" style="display:none;">
                                     <img id="js-preview-img-back" alt="裏面">
                                     <button type="button" class="m-img-upload__remove" id="js-remove-back">&times;</button>
@@ -163,7 +172,7 @@
                             </svg>
                             OCRで読み取り
                         </button>
-                        <p class="m-ocr__hint">表面の画像から氏名・会社名・連絡先などを自動で読み取ります</p>
+                        <p class="m-ocr__hint">表面の画像/PDFから氏名・会社名・連絡先などを自動で読み取ります</p>
                         <p id="js-ocr-status" class="m-ocr__status"></p>
                     </div>
                 </fieldset>
