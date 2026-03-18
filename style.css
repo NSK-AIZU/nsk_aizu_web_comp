@@ -1650,7 +1650,7 @@ body.is-fixed {
    ========================================= */
 
 .top-main {
-    padding-top: 90px; /* ヘッダー分 */
+    padding-top: 0;
 }
 
 /* --- ヒーロー --- */
@@ -1659,6 +1659,7 @@ body.is-fixed {
     width: 100%;
     height: 70vh;
     min-height: 400px;
+    padding-top: 90px; /* ヘッダー分を含めて画像がヘッダー下まで広がる */
     display: flex;
     align-items: center;
     justify-content: center;
