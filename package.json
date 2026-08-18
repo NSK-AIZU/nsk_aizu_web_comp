@@ -1,0 +1,10 @@
+{
+  "name": "nsk-aizu-web",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev ./ --port 8788"
+  },
+  "devDependencies": {
+    "wrangler": "^4.84.0"
+  }
+}

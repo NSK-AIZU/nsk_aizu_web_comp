@@ -1,7 +1,7 @@
 [
   { "name": "多田 旭志", "role": "理事長", "desc": "創設メンバー。言い出しっぺで、走り続ける人。", "photo": "/images/members/01.jpg" },
   { "name": "小林 佑輔", "role": "副理事長", "desc": "創設メンバー。頼れる右腕。", "photo": "/images/members/02.jpg" },
-  { "name": "小林 幸生", "role": "監事", "desc": "創設メンバー。裏からしっかり支えてくれる番人。", "photo": "/images/members/03.jpg" },
+  { "name": "小林 幸生", "role": "監事", "desc": "創設メンバー。新潟から目を光らせ、しっかり監査する番人。", "photo": "/images/members/03.jpg" },
   { "name": "ammannu", "role": "副理事長", "desc": "現役保育士。温かさと強さを兼ね備えた存在。", "photo": "/images/members/04.svg" },
   { "name": "Hameed Saji", "role": "アドバイザー", "desc": "我らが師匠。この方がいなかったら、この団体はなかった。", "photo": "/images/members/05.jpg" },
   { "name": "こしあんさん", "role": "相談役", "desc": "創設メンバーの頼れる先輩であり、相談相手。", "photo": "/images/members/06.svg" },
@@ -10,7 +10,12 @@
   { "name": "ひろかわ", "role": "フィールド担当？", "desc": "末っ子。考えるより先に手が動く、良いやつ。", "photo": "/images/members/09.jpg" },
   { "name": "じゅんじ", "role": "ムードメーカー？", "desc": "みんなが誇る、愛され担当。", "photo": "/images/members/10.jpg" },
   { "name": "そうへい", "role": "現場担当？", "desc": "まだ話せてないけど、吉野家で会えたから食の趣味は合いそう。", "photo": "/images/members/11.svg" },
-  { "name": "さきさん", "role": "サポート担当？", "desc": "真面目で優しい。まだまだ未知数なのも魅力。", "photo": "/images/members/12.svg" },
+  { "name": "さきさん", "role": "サポート担当？", "desc": "真面目で優しい。まだまだ未知数なのも魅力。", "photo": "/images/members/12.jpg" },
   { "name": "じゅんた", "role": "広報担当？", "desc": "生き方もカッコいい、我らのカッコいい担当。", "photo": "/images/members/13.jpg" },
-  { "name": "なお良い", "role": "実働担当？", "desc": "手がよく動く。マインドも最高。", "photo": "/images/members/14.svg" }
+  { "name": "なお良い", "role": "事業主幹", "desc": "手がよく動く。マインドも最高。", "photo": "/images/members/14.jpg" },
+  { "name": "りょう", "role": "自炊担当？", "desc": "ヒゲがカッコよく、雰囲気も抜群。実はケーキ作りが得意なのでは、と密かに怪しんでいる。", "photo": "/images/members/15.jpg" },
+  { "name": "いしもっさん", "role": "トマト担当？", "desc": "うちでは珍しい朝型人間。朝食は絶対パン派だと疑っている。", "photo": "/images/members/16.svg" },
+  { "name": "イブキ", "role": "ハード〜担当？", "desc": "教職を取っていないのに、教師の適性は間違いなしの逸材。", "photo": "/images/members/17.svg" },
+  { "name": "うさぎ", "role": "学祭担当", "desc": "いい感じに真面目。みんながつい後回しにしたい作業を、さりげなく引き受けてくれる。", "photo": "/images/members/18.jpg" },
+  { "name": "百", "role": "？？？", "desc": "情報が無さすぎる謎多き存在。早く一緒に飯に行かねば。", "photo": "/images/members/19.jpg" }
 ]

@@ -1,0 +1,43 @@
+# ============================================
+# 旧URLのリダイレクト設定（Cloudflare Pages）
+# 2026-08-18 サイト構成の簡素化にともない作成
+# ============================================
+
+# --- 英語版（廃止） → 対応する日本語ページへ ---
+/en/index.html      /               301
+/en/vision.html     /vision.html    301
+/en/about.html      /about.html     301
+/en/news.html       /news.html      301
+/en/voice.html      /voice.html     301
+/en/support.html    /support.html   301
+/en/contact.html    /contact.html   301
+/en/rice_calc.html  /               301
+/en/                /               301
+/en/*               /               301
+/gallery/en/*       /               301
+
+# --- 寄付ページ → SUPPORT内の寄付セクションへ ---
+/donate             /support.html#donate  301
+/donate.html        /support.html#donate  301
+
+# --- 活動日記 → NEWSへ ---
+/diary              /news.html      301
+/diary.html         /news.html      301
+
+# --- ギャラリー（廃止） ---
+/gallery/*          /               301
+
+# --- 教育支援コンテンツ（廃止） ---
+/education/*        /               301
+
+# --- 終了したイベント・ツール ---
+/tour               /               301
+/tour.html          /               301
+/tour_flyer.pdf     /               301
+/rice_calc          /               301
+/rice_calc.html     /               301
+
+# --- メンバー専用エリア（廃止） ---
+/members/*          /               301
+/login              /               301
+/login.html         /               301

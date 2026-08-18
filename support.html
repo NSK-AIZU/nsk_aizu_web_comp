@@ -19,6 +19,13 @@
     <meta property="og:locale" content="ja_JP">
     <meta property="og:site_name" content="NPO NSK_AIZU">
 
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@NSK_AIZU">
+    <meta name="twitter:title" content="SUPPORT | NSK_AIZU - 応援する">
+    <meta name="twitter:description" content="私たちの活動を応援してくださる方へ。あなたに合った応援の形がきっとあります。">
+    <meta name="twitter:image" content="https://npo-nsk-aizu.org/images/ogp.jpg">
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
@@ -29,6 +36,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "SUPPORT | NSK_AIZU - 応援する",
+        "description": "NSK_AIZUを応援する方法。寄付、農地提供、ボランティア参加など、あなたに合った応援の形を見つけてください。",
+        "url": "https://npo-nsk-aizu.org/support",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "NPO NSK_AIZU",
+            "url": "https://npo-nsk-aizu.org/"
+        }
+    }
+    </script>
 </head>
 <body class="subpage">
 
@@ -90,14 +112,14 @@
                     <span class="support-card__action">連絡する →</span>
                 </a>
 
-                <a href="/donate.html" class="support-card support-card--link">
+                <a href="#donate" class="support-card support-card--link">
                     <h2 class="support-card__title">寄付で応援</h2>
                     <p class="support-card__text">
                         活動を資金面から支えていただけます。<br>
                         金額の大小は関係ありません。<br>
                         あなたの気持ちが力になります。
                     </p>
-                    <span class="support-card__action">詳しく見る →</span>
+                    <span class="support-card__action">振込先を見る →</span>
                 </a>
 
                 <a href="/contact.html?subject=%E5%BF%9C%E6%8F%B4%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8" class="support-card support-card--link">
@@ -110,6 +132,45 @@
                     <span class="support-card__action">メッセージを送る →</span>
                 </a>
 
+            </div>
+        </section>
+
+        <!-- 寄付の方法 -->
+        <section class="donate-method" id="donate">
+            <div class="donate-method__inner">
+                <span class="donate-label">HOW TO DONATE</span>
+                <h2 class="donate-section-heading donate-section-heading--light">寄付の方法</h2>
+                <p class="donate-method__note">
+                    いただいた寄付は、農具・種苗の購入、農地への交通費、<br>
+                    活動の発信・運営に使わせていただきます。
+                </p>
+                <div class="donate-method-box">
+                    <h3 class="donate-method-box__label">銀行振込</h3>
+                    <table class="donate-method-table">
+                        <tr>
+                            <th>金融機関</th>
+                            <td>GMOあおぞらネット銀行（0310）</td>
+                        </tr>
+                        <tr>
+                            <th>支店</th>
+                            <td>法人営業部（101）</td>
+                        </tr>
+                        <tr>
+                            <th>口座種別</th>
+                            <td>普通預金</td>
+                        </tr>
+                        <tr>
+                            <th>口座番号</th>
+                            <td>2493721</td>
+                        </tr>
+                        <tr>
+                            <th>口座名義</th>
+                            <td>特定非営利活動法人ＮＳＫ－ＡＩＺＵ<br><small>トクヒ）エヌエスケーアイヅ</small></td>
+                        </tr>
+                    </table>
+                    <p class="donate-method-box__note">振込手数料はご負担をお願いしております。<br>お振込み後、お問い合わせフォームよりご一報いただけると幸いです。</p>
+                    <a href="/contact.html?subject=%E5%AF%84%E4%BB%98%E3%81%AE%E3%81%94%E9%80%A3%E7%B5%A1" class="donate-method-box__btn">振込完了を連絡する →</a>
+                </div>
             </div>
         </section>
 

@@ -1,89 +1,19 @@
 // ==========================================
-// 言語判定とパス設定
+// サイト共通設定
 // ==========================================
-// URLに '/en/' が含まれているかチェック
-const isEn = location.pathname.includes('/en/');
-
-// galleryページかどうかをチェック
-const isGallery = location.pathname.includes('/gallery/');
-
 // ルート相対パス（画像用）
 const path = '/images/';
 
-// ページごとのファイル名を取得（言語切り替え用）
-const currentFile = location.pathname.split('/').pop() || 'index.html';
-
-// 言語別のテキスト設定（すべてルート相対パス）
-const langData = {
-    ja: {
-        top: 'トップページ',
-        vision: 'ビジョン',
-        about: '私たちについて',
-        news: 'お知らせ',
-        gallery: '日めくりギャラリー',
-        rice: '画面de田んぼ',
-        voice: '仲間の声',
-        diary: '活動日記',
-        support: '応援する',
-        contact: 'お問い合わせ',
-        education: '教育支援',
-        topLink: '/',
-        visionLink: '/vision.html',
-        aboutLink: '/about.html',
-        newsLink: '/news.html',
-        galleryLink: '/gallery/',
-        riceLink: '/rice_calc.html',
-        voiceLink: '/voice.html',
-        diaryLink: '/diary.html',
-        supportLink: '/support.html',
-        contactLink: '/contact.html',
-        educationLink: '/education/',
-        switchJaClass: isEn ? '' : 'is-active',
-        switchEnClass: isEn ? 'is-active' : '',
-        switchJaLink: isEn ? '/' + currentFile : '#',
-        switchEnLink: isEn ? '#' : '/en/' + currentFile
-    },
-    en: {
-        top: 'HOME',
-        vision: 'OUR VISION',
-        about: 'WHO WE ARE',
-        news: 'NEWS',
-        gallery: 'DAILY GALLERY',
-        rice: 'RICE CALCULATOR',
-        voice: 'VOICES',
-        diary: 'DIARY',
-        support: 'SUPPORT US',
-        contact: 'GET IN TOUCH',
-        education: 'EDUCATION',
-        topLink: '/en/',
-        visionLink: '/en/vision.html',
-        aboutLink: '/en/about.html',
-        newsLink: '/en/news.html',
-        galleryLink: '/gallery/en/',
-        riceLink: '/en/rice_calc.html',
-        voiceLink: '/en/voice.html',
-        diaryLink: '/en/diary.html',
-        supportLink: '/en/support.html',
-        contactLink: '/en/contact.html',
-        educationLink: '/education/',
-        switchJaClass: '',
-        switchEnClass: 'is-active',
-        switchJaLink: '/' + currentFile,
-        switchEnLink: '#'
-    }
-};
-
-// 現在の言語データを選択
-const txt = isEn ? langData.en : langData.ja;
-
-// galleryページの言語切り替えリンク
-if (isGallery) {
-    if (isEn) {
-        txt.switchJaLink = '/gallery/';
-    } else {
-        txt.switchEnLink = '/gallery/en/';
-    }
-}
+// グローバルナビの項目（ここを編集すれば全ページのメニューが変わる）
+const navItems = [
+    { en: 'TOP',      jp: 'トップページ',   link: '/' },
+    { en: 'VISION',   jp: 'ビジョン',       link: '/vision.html' },
+    { en: 'ABOUT US', jp: '私たちについて', link: '/about.html' },
+    { en: 'NEWS',     jp: 'お知らせ',       link: '/news.html' },
+    { en: 'VOICE',    jp: '仲間の声',       link: '/voice.html' },
+    { en: 'SUPPORT',  jp: '応援する',       link: '/support.html' },
+    { en: 'CONTACT',  jp: 'お問い合わせ',   link: '/contact.html' }
+];
 
 
 // ==========================================
@@ -92,26 +22,17 @@ if (isGallery) {
 
 // ヘッダー + 全画面メニュー
 const headerContent = `
-    <a href="#main-content" class="skip-link">${isEn ? 'Skip to main content' : 'メインコンテンツへスキップ'}</a>
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
     <div class="header__inner">
         <div class="header__logo">
-            <a href="${txt.topLink}" aria-label="${isEn ? 'Go to home page' : 'ホームページへ戻る'}">
+            <a href="/" aria-label="ホームページへ戻る">
                 <img src="${path}logo.png" alt="NSK_AIZU">
             </a>
         </div>
         <div class="header__nav-area">
-            <div class="header__lang">
-                <a href="${txt.switchJaLink}"
-                   class="header__lang-link ${txt.switchJaClass}"
-                   aria-label="${isEn ? 'Switch to Japanese' : '日本語版に切り替え'}">JA</a>
-                <span class="header__lang-divider" aria-hidden="true"></span>
-                <a href="${txt.switchEnLink}"
-                   class="header__lang-link ${txt.switchEnClass}"
-                   aria-label="${isEn ? 'Switch to English' : '英語版に切り替え'}">EN</a>
-            </div>
             <button class="header__menu-btn"
                     id="js-menu-btn"
-                    aria-label="${isEn ? 'Open navigation menu' : 'ナビゲーションメニューを開く'}"
+                    aria-label="ナビゲーションメニューを開く"
                     aria-expanded="false"
                     aria-controls="js-global-nav">
                 <span aria-hidden="true"></span>
@@ -124,56 +45,14 @@ const headerContent = `
     <nav class="global-nav"
          id="js-global-nav"
          role="navigation"
-         aria-label="${isEn ? 'Main navigation' : 'メインナビゲーション'}">
+         aria-label="メインナビゲーション">
         <ul class="global-nav__list">
-            <li class="global-nav__item">
-                <a href="${txt.topLink}">
-                    <span class="global-nav__en">- TOP -</span>
-                    <span class="global-nav__jp">${txt.top}</span>
+${navItems.map(item => `            <li class="global-nav__item">
+                <a href="${item.link}">
+                    <span class="global-nav__en">- ${item.en} -</span>
+                    <span class="global-nav__jp">${item.jp}</span>
                 </a>
-            </li>
-            <li class="global-nav__item">
-                <a href="${txt.visionLink}">
-                    <span class="global-nav__en">- VISION -</span>
-                    <span class="global-nav__jp">${txt.vision}</span>
-                </a>
-            </li>
-            <li class="global-nav__item">
-                <a href="${txt.aboutLink}">
-                    <span class="global-nav__en">- ABOUT US -</span>
-                    <span class="global-nav__jp">${txt.about}</span>
-                </a>
-            </li>
-            <li class="global-nav__item">
-                <a href="${txt.newsLink}">
-                    <span class="global-nav__en">- NEWS -</span>
-                    <span class="global-nav__jp">${txt.news}</span>
-                </a>
-            </li>
-            <li class="global-nav__item">
-                <a href="${txt.supportLink}">
-                    <span class="global-nav__en">- SUPPORT -</span>
-                    <span class="global-nav__jp">${txt.support}</span>
-                </a>
-            </li>
-            <li class="global-nav__item">
-                <a href="${txt.voiceLink}">
-                    <span class="global-nav__en">- VOICE -</span>
-                    <span class="global-nav__jp">${txt.voice}</span>
-                </a>
-            </li>
-            <li class="global-nav__item">
-                <a href="${txt.galleryLink}">
-                    <span class="global-nav__en">- GALLERY -</span>
-                    <span class="global-nav__jp">${txt.gallery}</span>
-                </a>
-            </li>
-            <li class="global-nav__item">
-                <a href="${txt.contactLink}">
-                    <span class="global-nav__en">- CONTACT -</span>
-                    <span class="global-nav__jp">${txt.contact}</span>
-                </a>
-            </li>
+            </li>`).join('\n')}
         </ul>
     </nav>
 `;
@@ -191,14 +70,14 @@ const footerContent = `
                 <a href="https://x.com/NSK_AIZU"
                    target="_blank"
                    rel="noopener noreferrer"
-                   aria-label="${isEn ? 'Follow us on X (Twitter)' : 'X (Twitter) でフォロー'}"
+                   aria-label="X (Twitter) でフォロー"
                    class="footer__social-link">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
                 <a href="https://www.instagram.com/nsk_aizu_press/"
                    target="_blank"
                    rel="noopener noreferrer"
-                   aria-label="${isEn ? 'Follow us on Instagram' : 'Instagram でフォロー'}"
+                   aria-label="Instagram でフォロー"
                    class="footer__social-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16" aria-hidden="true">
                   <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
@@ -207,7 +86,7 @@ const footerContent = `
                 <a href="https://www.youtube.com/@NSK_AIZU"
                    target="_blank"
                    rel="noopener noreferrer"
-                   aria-label="${isEn ? 'Visit our YouTube channel' : 'YouTube チャンネルを見る'}"
+                   aria-label="YouTube チャンネルを見る"
                    class="footer__social-link">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
                 </a>
@@ -243,8 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
             menuBtn.setAttribute('aria-expanded', isOpen.toString());
             menuBtn.setAttribute('aria-label',
                 isOpen
-                    ? (isEn ? 'Close navigation menu' : 'ナビゲーションメニューを閉じる')
-                    : (isEn ? 'Open navigation menu' : 'ナビゲーションメニューを開く')
+                    ? ('ナビゲーションメニューを閉じる')
+                    : ('ナビゲーションメニューを開く')
             );
         });
 
@@ -258,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Reset aria-expanded state and label
                 menuBtn.setAttribute('aria-expanded', 'false');
                 menuBtn.setAttribute('aria-label',
-                    isEn ? 'Open navigation menu' : 'ナビゲーションメニューを開く'
+                    'ナビゲーションメニューを開く'
                 );
             });
         });
@@ -270,12 +149,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (form) {
         const FORM_ENDPOINT = form.action;
-        const REDIRECT_TO = isEn ? "/en/" : "/"; 
+        const REDIRECT_TO = "/"; 
         const REDIRECT_DELAY_MS = 2000;
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            statusEl.textContent = isEn ? "Sending..." : "送信中…";
+            statusEl.textContent = "送信中…";
             statusEl.className = "form-status";
             statusEl.removeAttribute('role');
             const submitBtn = form.querySelector('button[type="submit"]');
@@ -290,19 +169,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 if (res.ok) {
-                    statusEl.textContent = isEn ? "Sent successfully. Redirecting..." : "送信しました。トップページに戻ります。";
+                    statusEl.textContent = "送信しました。トップページに戻ります。";
                     statusEl.className = "form-status form-status--success";
                     form.reset();
                     setTimeout(() => { window.location.href = REDIRECT_TO; }, REDIRECT_DELAY_MS);
                 } else {
                     const errorData = await res.json().catch(() => ({}));
-                    const errorMsg = errorData.error || (isEn ? "Failed to send. Please try again." : "送信に失敗しました。もう一度お試しください。");
+                    const errorMsg = errorData.error || ("送信に失敗しました。もう一度お試しください。");
                     statusEl.textContent = errorMsg;
                     statusEl.className = "form-status form-status--error";
                     statusEl.setAttribute('role', 'alert');
                 }
             } catch (err) {
-                statusEl.textContent = isEn ? "Connection error. Please check your internet connection and try again." : "通信エラーで送信できませんでした。インターネット接続を確認してもう一度お試しください。";
+                statusEl.textContent = "通信エラーで送信できませんでした。インターネット接続を確認してもう一度お試しください。";
                 statusEl.className = "form-status form-status--error";
                 statusEl.setAttribute('role', 'alert');
             } finally {
