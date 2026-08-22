@@ -2,7 +2,7 @@
   "name": "nsk-aizu-web",
   "private": true,
   "scripts": {
-    "dev": "wrangler pages dev ./ --port 8788"
+    "dev": "wrangler pages dev ./ --port 8788 --compatibility-date=2026-04-27"
   },
   "devDependencies": {
     "wrangler": "^4.84.0"

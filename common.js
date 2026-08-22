@@ -6,13 +6,11 @@ const path = '/images/';
 
 // グローバルナビの項目（ここを編集すれば全ページのメニューが変わる）
 const navItems = [
-    { en: 'TOP',      jp: 'トップページ',   link: '/' },
-    { en: 'VISION',   jp: 'ビジョン',       link: '/vision.html' },
-    { en: 'ABOUT US', jp: '私たちについて', link: '/about.html' },
-    { en: 'NEWS',     jp: 'お知らせ',       link: '/news.html' },
-    { en: 'VOICE',    jp: '仲間の声',       link: '/voice.html' },
-    { en: 'SUPPORT',  jp: '応援する',       link: '/support.html' },
-    { en: 'CONTACT',  jp: 'お問い合わせ',   link: '/contact.html' }
+    { en: 'TOP',      jp: 'トップページ',   link: '#top' },
+    { en: 'MESSAGE',  jp: 'ごあいさつ',     link: '#greeting' },
+    { en: 'HISTORY',  jp: 'これまでの歩み', link: '#history' },
+    { en: 'PROJECTS', jp: '活動',           link: '#projects' },
+    { en: 'CONTACT',  jp: 'お問い合わせ',   link: '#contact' }
 ];
 
 
@@ -25,8 +23,8 @@ const headerContent = `
     <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
     <div class="header__inner">
         <div class="header__logo">
-            <a href="/" aria-label="ホームページへ戻る">
-                <img src="${path}logo.png" alt="NSK_AIZU">
+            <a href="#top" aria-label="ページの先頭へ戻る">
+                <img src="${path}logo-dark-trim.png" alt="NSK_AIZU">
             </a>
         </div>
         <div class="header__nav-area">
@@ -214,6 +212,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const NOTE_URL = "https://note.com/terushon";
     // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
+    // 表示先が無ければ取得しない（NEWSを廃止したため通常は何もしない）
+    if (!document.getElementById('js-news-list') && !document.getElementById('js-news-list-home')) return;
+
     // 共通: note RSS データ取得（1回だけfetchして複数箇所で使い回す）
     const noteDataPromise = fetch(NOTE_API)
         .then(res => {
@@ -285,254 +286,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ---------------------------------------------------
-    // 3. VISIONカード背景画像ローテーション (index.html)
-    //    /images/activity/ 内の画像を一定間隔で切り替え
-    // ---------------------------------------------------
-    const visionBg = document.getElementById('js-vision-bg');
-
-    if (visionBg) {
-        // 手動で管理する活動写真リスト
-        // 新しい写真を追加するときはここにパスを追加するだけ
-        const activityImages = [
-            '/images/vision.jpg',
-            '/images/activity/001.jpg',
-            '/images/activity/002.jpg',
-            '/images/activity/003.jpg',
-            '/images/activity/004.jpg',
-            '/images/activity/005.jpg',
-        ];
-
-        // 2枚目以降をバックグラウンドで事前読み込み
-        activityImages.slice(1).forEach(src => {
-            const img = new Image();
-            img.src = src;
-        });
-
-        // 画像が2枚以上あるときだけローテーション
-        if (activityImages.length > 1) {
-            let currentIndex = 0;
-            const INTERVAL = 7000; // 7秒ごとに切り替え
-
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % activityImages.length;
-                // フェードアウト → 画像切替 → フェードイン
-                visionBg.style.opacity = '0';
-                setTimeout(() => {
-                    visionBg.style.backgroundImage = `url('${activityImages[currentIndex]}')`;
-                    visionBg.style.opacity = '0.6';
-                }, 500);
-            }, INTERVAL);
-        }
-    }
-});
-
-// ==========================================
-// 目標マップ モーダル
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const trigger = document.getElementById('js-goals-trigger');
-    const modal = document.getElementById('js-goals-modal');
-    if (!trigger || !modal) return;
-
-    const overlay = document.getElementById('js-goals-overlay');
-    const closeBtn = document.getElementById('js-goals-close');
-    const list = document.getElementById('js-goals-list');
-    let loaded = false;
-
-    function loadGoals() {
-        if (loaded) return;
-        loaded = true;
-        fetch('/data/goals-data.json')
-            .then(res => res.json())
-            .then(data => {
-                list.innerHTML = data.map(g => {
-                    const pct = Math.round((g.current / g.max) * 100);
-                    const isZero = g.current === 0;
-                    return `<div class="goal-item">
-                        <div class="goal-item__header">
-                            <span class="goal-item__label">${g.label}</span>
-                            <span class="goal-item__fraction"><strong>${g.current}</strong> / ${g.max}${g.unit}</span>
-                        </div>
-                        <div class="goal-item__bar">
-                            <div class="goal-item__fill${isZero ? ' goal-item__fill--zero' : ''}" style="width:${pct}%"></div>
-                        </div>
-                        <span class="goal-item__note">${g.note}</span>
-                    </div>`;
-                }).join('');
-            })
-            .catch(() => {
-                list.innerHTML = '<p style="color:#999;padding:16px 0;text-align:center;">データを読み込めませんでした</p>';
-            });
-    }
-
-    function openModal() {
-        loadGoals();
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-    }
-
-    trigger.addEventListener('click', openModal);
-    trigger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openModal();
-        }
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-            closeModal();
-        }
-    });
-});
-
-// ==========================================
-// 活動タイムライン モーダル
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const trigger = document.getElementById('js-timeline-trigger');
-    const modal = document.getElementById('js-timeline-modal');
-    if (!trigger || !modal) return;
-
-    const overlay = document.getElementById('js-timeline-overlay');
-    const closeBtn = document.getElementById('js-timeline-close');
-    const list = document.getElementById('js-timeline-list');
-    let loaded = false;
-
-    function loadTimeline() {
-        if (loaded) return;
-        loaded = true;
-        fetch('/data/timeline-data.json')
-            .then(res => res.json())
-            .then(data => {
-                list.innerHTML = data.map(item =>
-                    `<div class="timeline-item">
-                        <span class="timeline-item__date">${item.date}</span>
-                        <span class="timeline-item__title">${item.title}</span>
-                        <span class="timeline-item__desc">${item.desc}</span>
-                    </div>`
-                ).join('');
-            })
-            .catch(() => {
-                list.innerHTML = '<p style="color:#999;padding:16px 0;text-align:center;">データを読み込めませんでした</p>';
-            });
-    }
-
-    function openModal() {
-        loadTimeline();
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-    }
-
-    trigger.addEventListener('click', openModal);
-    trigger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openModal();
-        }
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-            closeModal();
-        }
-    });
-});
-
-// ==========================================
-// 活動○ヶ月目を自動計算（開始: 2025年12月）
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const el = document.getElementById('js-months-count');
-    if (!el) return;
-
-    const startYear = 2025;
-    const startMonth = 12; // 12月
-    const now = new Date();
-    const months = (now.getFullYear() - startYear) * 12 + (now.getMonth() + 1) - startMonth + 1;
-    el.textContent = Math.max(1, months);
-});
-
-// ==========================================
-// お世話になった人 モーダル
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const trigger = document.getElementById('js-thanks-trigger');
-    const modal = document.getElementById('js-thanks-modal');
-    if (!trigger || !modal) return;
-
-    const overlay = document.getElementById('js-thanks-overlay');
-    const closeBtn = document.getElementById('js-thanks-close');
-    const thanksList = modal.querySelector('.thanks-list');
-
-    // JSON からリストを読み込み
-    fetch('/data/thanks-data.json')
-        .then(res => res.json())
-        .then(data => {
-            // 数字バーの人数も自動更新
-            const valueEl = trigger.querySelector('.top-numbers__value');
-            if (valueEl) valueEl.textContent = data.length;
-
-            thanksList.innerHTML = data.map(p =>
-                `<li class="thanks-list__item">
-                    <span class="thanks-list__name">${p.name}</span>
-                    <span class="thanks-list__desc">${p.desc}</span>
-                </li>`
-            ).join('');
-        })
-        .catch(() => {
-            thanksList.innerHTML = '<li style="color:#999;padding:16px 0;">データを読み込めませんでした</li>';
-        });
-
-    function openModal() {
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-    }
-
-    trigger.addEventListener('click', openModal);
-    trigger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openModal();
-        }
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-            closeModal();
-        }
-    });
 });
 
 // ==========================================
@@ -581,70 +334,143 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
+
 // ==========================================
-// メンバー モーダル
+// 写真プレースホルダー（画像が未設置のとき、置き場所を明示）
+// ==========================================
+function showPhotoPlaceholder(img) {
+    if (img.dataset.placeholderShown) return;
+    img.dataset.placeholderShown = '1';
+
+    const box = document.createElement('div');
+    box.className = 'photo-placeholder';
+    box.innerHTML = `
+        <span class="photo-placeholder__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                <circle cx="8.5" cy="10" r="1.5"/>
+                <path d="M21 15l-5-5L5 19"/>
+            </svg>
+        </span>
+        <span class="photo-placeholder__title">${img.dataset.placeholder || '写真'}</span>
+        <code class="photo-placeholder__file">${img.dataset.filename || ''}</code>
+        <span class="photo-placeholder__note">${img.dataset.note || ''}</span>
+    `;
+    img.replaceWith(box);
+}
+
+// HTMLに直接書かれた画像は common.js の読み込み前に失敗しうるため、
+// 読み込み完了後にもう一度チェックする
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('img[data-placeholder]').forEach(img => {
+        if (img.complete && img.naturalWidth === 0) showPhotoPlaceholder(img);
+    });
+});
+
+// ==========================================
+// プロジェクト一覧（data/projects.json）
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-    const trigger = document.getElementById('js-members-trigger');
-    const modal = document.getElementById('js-members-modal');
-    if (!trigger || !modal) return;
+    const fieldEl = document.getElementById('js-projects-field');
+    const beyondEl = document.getElementById('js-projects-beyond');
+    if (!fieldEl && !beyondEl) return;
 
-    const overlay = document.getElementById('js-members-overlay');
-    const closeBtn = document.getElementById('js-members-close');
-    const grid = document.getElementById('js-members-grid');
-    let loaded = false;
+    fetch('/data/projects.json')
+        .then(res => res.json())
+        .then(data => {
+            const render = (items) => items.map(p => `
+                <article class="project-card">
+                    <div class="project-card__media">
+                        <img src="${p.image}" alt="${p.title}"
+                             data-placeholder="${p.title}${p.place ? '（' + p.place + '）' : ''}の写真"
+                             data-filename="${p.image}"
+                             data-note="${p.imageNote || ''}"
+                             onerror="showPhotoPlaceholder(this)">
+                    </div>
+                    <div class="project-card__body">
+                        <h4 class="project-card__title">
+                            ${p.title}${p.place ? `<span class="project-card__place">${p.place}</span>` : ''}
+                        </h4>
+                        ${p.badge ? `<p class="project-card__badge">${p.badge}</p>` : ''}
+                        ${p.body.map(t => `<p class="project-card__text">${t}</p>`).join('')}
+                        ${p.link ? `<a class="project-card__link" href="${p.link.url}" target="_blank" rel="noopener noreferrer">${p.link.label} →</a>` : ''}
+                    </div>
+                </article>
+            `).join('');
 
-    function loadMembers() {
-        if (loaded) return;
-        loaded = true;
-        fetch('/data/members-data.json')
-            .then(res => res.json())
-            .then(data => {
-                // 数字バーの人数も自動更新
-                const valueEl = trigger.querySelector('.top-numbers__value');
-                if (valueEl) valueEl.textContent = data.length;
+            const pub = data.filter(p => p.published);
+            if (fieldEl)  fieldEl.innerHTML  = render(pub.filter(p => p.group === 'field'));
+            if (beyondEl) beyondEl.innerHTML = render(pub.filter(p => p.group === 'beyond'));
+        })
+        .catch(() => {
+            if (fieldEl) fieldEl.innerHTML = '<p class="project-error">プロジェクト情報の読み込みに失敗しました。</p>';
+        });
+});
 
-                grid.innerHTML = data.map(m =>
-                    `<div class="member-card">
-                        <img class="member-card__photo" src="${m.photo}" alt="${m.name}" loading="lazy" width="80" height="80">
-                        <span class="member-card__name">${m.name}</span>
-                        <span class="member-card__role">${m.role}</span>
-                        <span class="member-card__desc">${m.desc}</span>
-                    </div>`
-                ).join('');
-            })
-            .catch(() => {
-                grid.innerHTML = '<p style="color:#999;padding:16px 0;text-align:center;">データを読み込めませんでした</p>';
-            });
-    }
+// ==========================================
+// これまでの歩み（data/timeline-data.json）
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const listEl = document.getElementById('js-timeline-list');
+    if (!listEl) return;
 
-    function openModal() {
-        loadMembers();
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-    }
+    fetch('/data/timeline-data.json')
+        .then(res => res.json())
+        .then(data => {
+            listEl.innerHTML = data.map(item => `
+                <div class="history-item">
+                    <time class="history-item__date">${item.date}</time>
+                    <div class="history-item__body">
+                        <h3 class="history-item__title">${item.title}</h3>
+                        ${item.desc ? `<p class="history-item__desc">${item.desc}</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        })
+        .catch(() => {
+            listEl.innerHTML = '<p class="project-error">読み込みに失敗しました。</p>';
+        });
+});
 
-    function closeModal() {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-    }
 
-    trigger.addEventListener('click', openModal);
-    trigger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+// ==========================================
+// ページ内スクロール（1ページ構成）
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const HEADER_OFFSET = 80;
+
+    const scrollToId = (id) => {
+        if (id === 'top' || id === '') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return true;
+        }
+        const target = document.getElementById(id);
+        if (!target) return false;
+        const y = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        return true;
+    };
+
+    document.addEventListener('click', (e) => {
+        const a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        const id = a.getAttribute('href').slice(1);
+        if (scrollToId(id)) {
             e.preventDefault();
-            openModal();
+            if (id) history.replaceState(null, '', '#' + id);
+        }
+
+        // 応援カードから来た場合、件名を先に入れておく
+        const subject = a.dataset.subject;
+        if (subject) {
+            const field = document.getElementById('subject');
+            if (field) field.value = subject;
         }
     });
 
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-            closeModal();
-        }
-    });
+    // 別ページや外部から #xxx 付きで開かれたときの位置補正
+    if (location.hash.length > 1) {
+        setTimeout(() => scrollToId(location.hash.slice(1)), 300);
+    }
 });

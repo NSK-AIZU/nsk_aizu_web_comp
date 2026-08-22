@@ -1,33 +1,34 @@
 # ============================================
 # 旧URLのリダイレクト設定（Cloudflare Pages）
-# 2026-08-18 サイト構成の簡素化にともない作成
+# 2026-08-19 1ページ構成への統合にともない更新
 # ============================================
 
-# --- 英語版（廃止） → 対応する日本語ページへ ---
-/en/index.html      /               301
-/en/vision.html     /vision.html    301
-/en/about.html      /about.html     301
-/en/news.html       /news.html      301
-/en/voice.html      /voice.html     301
-/en/support.html    /support.html   301
-/en/contact.html    /contact.html   301
-/en/rice_calc.html  /               301
-/en/                /               301
+# --- 英語版（廃止） ---
 /en/*               /               301
 /gallery/en/*       /               301
 
-# --- 寄付ページ → SUPPORT内の寄付セクションへ ---
-/donate             /support.html#donate  301
-/donate.html        /support.html#donate  301
+# --- 1ページ化にともない、旧ページは対応するセクションへ ---
+/vision             /#greeting      301
+/vision.html        /#greeting      301
+/about              /#greeting      301
+/about.html         /#greeting      301
+/voice              /               301
+/voice.html         /               301
+/support            /#contact       301
+/support.html       /#contact       301
+/donate             /#contact       301
+/donate.html        /#contact       301
+/contact            /#contact       301
+/contact.html       /#contact       301
 
-# --- 活動日記 → NEWSへ ---
-/diary              /news.html      301
-/diary.html         /news.html      301
+# --- NEWS（廃止） → note へ ---
+/news               https://note.com/terushon  301
+/news.html          https://note.com/terushon  301
+/diary              /               301
+/diary.html         /               301
 
-# --- ギャラリー（廃止） ---
+# --- ギャラリー・教育支援（廃止） ---
 /gallery/*          /               301
-
-# --- 教育支援コンテンツ（廃止） ---
 /education/*        /               301
 
 # --- 終了したイベント・ツール ---
